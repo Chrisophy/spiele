@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 # Entertain Master
 # zusatzmetall
-# 2026.11.23
+# 2026.11.24
 
 EXT_ID = 'hanfeld'
 EXT_NAME = 'Entertain Master'
-EXT_DESCRIPTION = "📺 Entertain Master: Endloses Open-World-Spiel in Rheinhanfen. Ausgedachte Codes besorgen, Antennen und Kabel heimlich verlegen, Kunden mit allen Sendern versorgen, Filme scrapen und tauschen, Kino und Autokino kaufen, in Hollyhanf Videos drehen und am Ende den Fernsehturm übernehmen. Dazu Wohnung, Camping, Freibad, Rodelbahn und viel Quatsch. Fernbedienung und Touch. Alles nur Fiktion!"
+EXT_DESCRIPTION = "📺 Entertain Master: Vom Pizzaboten zum größten Unterhaltungs-Imperium Europas. Open-World in Rheinhanfen und 11 Ländern, legal mit Lizenzen und Ruf oder illegal mit Codes und Antennen, Kino, Fernsehturm, eigener Kinofilm. Alles ausgedacht, mit der Fernbedienung spielbar."
 EXT_LINKS = [('Entertain Master', 'index')]
 EXT_SETTINGS = []
 
@@ -58,6 +58,9 @@ html,body{height:100%;margin:0;overflow:hidden;background:#000;color:var(--tx);f
 .sitp .btn{margin:.22rem 0;padding:.42rem .9rem}
 .sitp .hd{margin-bottom:.35rem}
 #trk div.r{border-left-color:var(--gr)}
+#trk div.tv{border-left-color:#5fd0ff}
+#trk div.ziel{border-left-color:#ffd23f;background:rgba(46,36,8,.9)}
+#trk div.tv.k{border-left-color:var(--rd)}
 #ov.t{background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.2) 40%,rgba(0,0,0,.65))}
 #ovc{position:absolute;left:50%;width:69rem;max-width:94%;transform:translateX(-50%);top:6%;bottom:6%;overflow:hidden;background:rgba(14,19,15,.96);border:2px solid var(--ln);border-radius:.8rem;padding:.8rem}
 #ov.t #ovc{background:none;border:none}
@@ -360,7 +363,7 @@ const GOODS={
  m_kuchen:{n:'Kaffee & Kuchen',u:'Gedeck',base:6},
  b_alt:{n:'Alt',u:'Sixpack',base:8},
  b_pils:{n:'Pils',u:'Sixpack',base:7},
- b_koelsch:{n:'Kölsch',u:'Sixpack',base:7},
+ b_export:{n:'Export',u:'Sixpack',base:7},
  b_frei:{n:'Alkoholfrei',u:'Sixpack',base:6},
  c_apo:{n:'Rezept-Päckchen',u:'Päckchen',base:0},
  c_holl:{n:'Coffeeshop-Gras',u:'Tütchen',base:10},
@@ -368,13 +371,13 @@ const GOODS={
  koffer:{n:'Geheimrezept',base:0}
 };
 const MENUS=['m_curry','m_pizza','m_doener','m_gyros','m_asia','m_kuchen'];
-const BEERS=['b_alt','b_pils','b_koelsch','b_frei'];
+const BEERS=['b_alt','b_pils','b_export','b_frei'];
 const WEED=['c_holl','c_str'];
 const TRADE=MENUS.concat(BEERS,WEED,['c_apo']);
-const ALC={b_alt:1,b_pils:1,b_koelsch:1};
+const ALC={b_alt:1,b_pils:1,b_export:1};
 const ILL={c_holl:1,c_str:1};
 const SELL=MENUS.concat(BEERS,WEED);
-const SHOP={hq:['m_curry'],pizza:['m_pizza'],doener:['m_doener'],grieche:['m_gyros'],asia:['m_asia'],cafe:['m_kuchen'],mega:['b_alt','b_pils','b_koelsch','b_frei'],land:['b_alt','b_frei'],hafen:['b_pils','b_koelsch']};
+const SHOP={hq:['m_curry'],pizza:['m_pizza'],doener:['m_doener'],grieche:['m_gyros'],asia:['m_asia'],cafe:['m_kuchen'],mega:['b_alt','b_pils','b_export','b_frei'],land:['b_alt','b_frei'],hafen:['b_pils','b_export']};
 const DIST={
  hq:{n:'Imbiss Hanfred Hanfbier',sub:'Deine Zentrale',d:'Hier startet jede Tour. Die Küche brutzelt Currywurst-Menüs, du lieferst aus. Abends ist hier alles sicher, und Chefin Willi hat immer einen Spruch parat.'},
  apo:{n:'Rhein-Apotheke',sub:'Dein Hauptjob',d:'Apothekerin Dr. Kräutlein packt Rezepte für ihre Patienten: Medizinal-Cannabis in Apotheken-Qualität, verplombt und legal. Du bringst die Päckchen zu den Patienten. Ehrliche Arbeit, fester Lohn, gutes Trinkgeld.'},
@@ -383,7 +386,7 @@ const DIST={
  altstadt:{n:'Zum goldenen Fass',sub:'Altstadt',c:1,d:'Die längste Theke der Stadt. Wenn das Fass leer ist, bestellen die Wirte Nachschub bei dir.'},
  land:{n:'Landgut Hopfenhof',sub:'Landgut',c:1,pf:.9,d:'Die Hofbrauerei braut Alt und Alkoholfreies. Der Bauer winkt freundlich und verkauft ab Hof.'},
  club:{n:'Club Neon',sub:'Clubmeile',c:1,d:'Bass, Nebel und volle Taschen. Die Türsteher kontrollieren Ausweise: Alkohol erst ab 18!'},
- hafen:{n:'Hafen-Großhandel',sub:'Hafen',c:1,pf:.9,d:'Pils und Kölsch palettenweise und günstig. Und hinten im Hof steht Kalle, der leise „Psst“ macht.'},
+ hafen:{n:'Hafen-Großhandel',sub:'Hafen',c:1,pf:.9,d:'Pils und Export palettenweise und günstig. Und hinten im Hof steht Kalle, der leise „Psst“ macht.'},
  stadion:{n:'Stadionkiosk',sub:'Stadion',c:1,d:'90 Minuten Hunger und Durst. An Spieltagen wird pausenlos bestellt.'},
  verein:{n:'Vereinsheim SV Rheinhanfen',sub:'Sportpark',c:1,d:'Nach dem Training haben alle Hunger. Hier wird nur Alkoholfreies bestellt, die Jugend ist ja dabei.'},
  pizza:{n:'Pizzeria Bella Rheinhanfen',sub:'Grachtenviertel',food:'pizza',d:'Steinofen, Basilikum und ein Chef, der bei jeder Bestellung singt. Hier gibt es das Pizza-Menü.'},
@@ -391,7 +394,7 @@ const DIST={
  grieche:{n:'Taverna Olympia',sub:'Grachtenviertel',food:'grieche',d:'Blau-weiße Tischdecken, der Gyros-Teller dampft, und der Ouzo kommt aufs Haus. Opa!'},
  asia:{n:'Asia Wok Glück',sub:'Grachtenviertel',food:'asia',d:'Der Wok zischt, die Asia-Boxen stapeln sich, und in jede gehört ein Glückskeks.'},
  cafe:{n:'Cafeteria Kanalblick',sub:'Grachtenviertel',food:'cafe',d:'Kaffee und Kuchen zum Mitnehmen, dazu ein Fensterplatz mit Blick auf die Boote.'},
- mega:{n:'MEGAMARKT',sub:'Riesen-Supermarkt',food:'mega',pf:.85,d:'So groß, dass es zwischen den Regalen Straßenschilder gibt. Alt, Pils, Kölsch und Alkoholfrei, alles günstig.'}
+ mega:{n:'MEGAMARKT',sub:'Riesen-Supermarkt',food:'mega',pf:.85,d:'So groß, dass es zwischen den Regalen Straßenschilder gibt. Alt, Pils, Export und Alkoholfrei, alles günstig.'}
 };
 const CUST=Object.keys(DIST).filter(k=>DIST[k].c);
 const MARKETS=CUST;
@@ -417,10 +420,10 @@ const EVT=[
  {t:'Regentag: Keiner will raus, der Lieferdienst boomt.',m:[['m_*','*',1.3]]},
  {t:'Grippewelle: In der Rhein-Apotheke stapeln sich die Rezepte.',m:[['rezept','*',1.4]]},
  {t:'Großkontrolle der Polizei: Straßenhandel ist heute besonders riskant.',m:[['street','*',1.8]]},
- {t:'Gartenparty im Villenviertel: Gyros und Kölsch für alle.',m:[['m_gyros','villen',1.5],['b_koelsch','villen',1.4]]},
+ {t:'Gartenparty im Villenviertel: Gyros und Export für alle.',m:[['m_gyros','villen',1.5],['b_export','villen',1.4]]},
  {t:'Pokalspiel im Sportpark: Das Vereinsheim will Pizza und Alkoholfreies.',m:[['m_pizza','verein',1.6],['b_frei','verein',1.5]]},
  {t:'Kaffeeklatsch auf dem Landgut: Kaffee und Kuchen für den ganzen Hof.',m:[['m_kuchen','land',1.6]]},
- {t:'Clubnacht im Neon: Kölsch und Asia-Boxen gehen weg wie nichts.',m:[['b_koelsch','club',1.5],['m_asia','club',1.4]]}
+ {t:'Clubnacht im Neon: Export und Asia-Boxen gehen weg wie nichts.',m:[['b_export','club',1.5],['m_asia','club',1.4]]}
 ];
 
 let G=null;
@@ -466,9 +469,9 @@ function mkOffer(ft){
   o.dl=G.day+rnd(1,3);
  }else if(t==='lieferung'){
   let it=null,to=null;
-  const ev=[];G.events.forEach(e=>(e.m||[]).forEach(x=>{if(GOODS[x[0]]&&TRADE.indexOf(x[0])>=0)ev.push(x);}));
+  const ev=[];G.events.forEach(e=>(e.m||[]).forEach(x=>{if(GOODS[x[0]]&&TRADE.indexOf(x[0])>=0&&MENUS.indexOf(x[0])>=0)ev.push(x);}));
   if(ev.length&&chance(.45)){const x=pick(ev);it=x[0];if(x[1]!=='*'&&DIST[x[1]])to=x[1];}
-  if(!it)it=chance(.6)?pick(MENUS):pick(BEERS);
+  if(!it)it=pick(MENUS);
   if(!to){const pool=CUST.filter(k=>(SHOP[k]||[]).indexOf(it)<0&&!(ALC[it]&&k==='verein'));to=pick(pool);}
   if(ALC[it]&&to==='verein')it='b_frei';
   o.item=it;o.to=to;
@@ -485,7 +488,7 @@ function mkOffer(ft){
  return o;
 }
 function offerTarget(){return Math.min(7,4+Math.floor(G.resp/6));}
-function fillOffers(){while(G.offers.length<offerTarget())G.offers.push(mkOffer());}
+function fillOffers(){if(G.med&&(G.med.st||0)>=2){G.offers=[];return;}while(G.offers.length<offerTarget())G.offers.push(mkOffer());}
 function mTitle(o){const L=NAMES[o.t]||NAMES.lieferung;return L[o.cl%L.length];}
 function mLine(o){
  if(o.t==='kurier')return 'Geheimrezept abholen: '+DIST[o.from].n+'. Übergabe: '+DIST[o.to].n+'.';
@@ -630,7 +633,7 @@ function clock(){const h=G.t/DAY_S*24,hh=Math.floor(h),mm=Math.floor((h-hh)*60);
 function hour(){return G.t/DAY_S*24;}
 function newGame(){
  bumpStarts();
- G={day:1,t:8/24*DAY_S,cash:900,debt:2500,heat:5,resp:0,loc:'',
+ G={day:1,t:8/24*DAY_S,cash:40,debt:0,heat:5,resp:0,loc:'',
   inv:mkInv(),
   up:{brau:0,haus:0,trunk:0,tuning:0,leib:0,anwalt:0,thermo:0},apoBan:0,
   prod:{brau:{n:0,left:0},haus:{n:0,left:0},out:{curry:0,eis:0}},
@@ -1270,6 +1273,7 @@ function enterZone(name){
  PR=[];FX=[];wanted=0;escapeT=0;bustT=0;
  P.x=z.spawn.x;P.y=z.spawn.y;P.vx=P.vy=0;P.inCar=false;P.sit=null;
  if(z.spawnRide){const R=z.rides[0];R.x=z.spawn.x;R.y=z.spawn.y;R.a=0;R.sp=0;P.ride=R;}
+ mktEnter(z);
  sfx('arrive');
  cam.x=camX(P.x-VW/2);cam.y=camY(P.y-VH/2);
  UI.hudS=null;UI.trkS=null;
@@ -1362,7 +1366,7 @@ function update(dt){
  cam.x+=(tx-cam.x)*Math.min(1,dt*6);cam.y+=(ty-cam.y)*Math.min(1,dt*6);
  cam.x=camX(cam.x);cam.y=camY(cam.y);
 }
-function checkWin(){if(!G)return;const M=[15000,30000,60000,120000,250000,500000,1000000],i=G.mile||0;if(i<M.length&&worth()>=M[i]){G.mile=i+1;G.won=true;msgCb('__win:'+M[i]);}}
+function checkWin(){if(G)return;const M=[15000,30000,60000,120000,250000,500000,1000000],i=G.mile||0;if(i<M.length&&worth()>=M[i]){G.mile=i+1;G.won=true;msgCb('__win:'+M[i]);}}
 function nearMarker(){
  let b=null,bd=38;
  MKS.forEach(m=>{const d=Math.hypot(m.x-P.x,m.y-P.y);if(d<bd){bd=d;b=m;}});
@@ -2186,7 +2190,7 @@ function drawMarker(m,hl){
  ctx.fillStyle='rgba(0,0,0,.35)';circle(m.x,m.y+2,17);
  ctx.fillStyle=m.col;circle(m.x,m.y,15);
  ctx.fillStyle='#111';ctx.font='bold 15px Arial';ctx.textAlign='center';ctx.textBaseline='middle';
- ctx.fillText(m.id==='apo'?'+':m.kind==='hq'?'H':m.kind==='willi'?'W':m.kind==='buedchen'?'B':m.kind==='scream'?'!':m.kind==='sk'?'★':'€',m.x,m.y+1);
+ ctx.fillText(m.id==='apo'?'+':m.kind==='hq'?'H':m.kind==='willi'?'W':m.kind==='buedchen'?'B':m.kind==='scream'?'!':m.kind==='sk'?(m.med?'TV':'★'):'€',m.x,m.y+1);
 }
 function drawPed(p){
  if(p.snow){drawSnowman(p);return;}
@@ -2309,6 +2313,7 @@ function render(){
    ctx.save();ctx.translate(gx+Math.cos(a)*48,gy+Math.sin(a)*48);ctx.rotate(a);
    ctx.fillStyle='#f2b441';ctx.strokeStyle='#000';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(10,0);ctx.lineTo(-6,-8);ctx.lineTo(-3,0);ctx.lineTo(-6,8);ctx.closePath();ctx.fill();ctx.stroke();ctx.restore();
   }
+  medNavWorld(gx,gy,cx,cy);
   if(RACE){
    const pl=1+Math.sin(timeNow*6)*.15;
    ctx.strokeStyle='#6bcf63';ctx.lineWidth=5;ctx.beginPath();ctx.arc(RACE.gx,RACE.gy,22*pl,0,6.283);ctx.stroke();ctx.lineWidth=1;
@@ -2340,6 +2345,7 @@ function render(){
   if(hi>0){ctx.fillStyle='hsla('+Math.floor((timeNow*45)%360)+',85%,55%,'+(.12*hi)+')';ctx.fillRect(0,0,VW,VH);}
   if(G.drunk>=3){ctx.fillStyle='rgba(255,200,120,'+Math.min(.14,(G.drunk-2)*.04)+')';ctx.fillRect(0,0,VW,VH);}
  }
+ if(G)medNavEdge(cx,cy);
  if(MG&&G&&!ZONE)drawMG();
  if(fade){
   const k=fade.t/fade.dur,a=Math.min(1,Math.sin(Math.PI*k)*1.8);
@@ -3457,7 +3463,7 @@ function skAct(p){
   return;
  }
  closeModal();
- if(skAct2(p)||skAct3(p)||skAct4(p)||skAct5(p)||skAct6(p)||skAct7(p)||skAct8(p)||skAct9(p)||skAct10(p)||skAct11(p)||skAct12(p)||skAct13(p)||skAct14(p)||skAct15(p)||skAct16(p)||skAct17(p)||skAct18(p)||skAct21(p)||skAct20(p)||skAct19(p))return;
+ if(skAct2(p)||skAct3(p)||skAct4(p)||skAct5(p)||skAct6(p)||skAct7(p)||skAct8(p)||skAct9(p)||skAct10(p)||skAct11(p)||skAct12(p)||skAct13(p)||skAct14(p)||skAct15(p)||skAct16(p)||skAct17(p)||skAct18(p)||skAct23(p)||skAct22(p)||skAct21(p)||skAct20(p)||skAct19(p))return;
  if(p==='knab'){
   const c=z&&z.candy?z.candy.filter(q=>q.on):[];
   if(!c.length){toast('Das Haus ist kahl gefuttert. Die Hexe schnippt, und alles ist wieder da.');if(z&&z.candy)z.candy.forEach(q=>{q.on=true;});mood(5,'+5');sfx('magic');return;}
@@ -5396,10 +5402,10 @@ function mOX(){return ZONE?0:Math.floor((304-CITY.MW*2.5)/2);}
 function miniDraw(x,big){
  const S=mS(),O=mOX(),r=big?4:3;
  x.drawImage(MM,O,0);
- MKS.forEach(m=>{x.fillStyle=m.kind==='hq'?'#6bcf63':m.kind==='willi'?'#e5604d':m.kind==='portal'?'#c06bff':m.kind==='buedchen'?'#46c2a0':m.kind==='scream'?'#ff5030':m.kind==='disco'?'#ff5fd0':'#f2b441';x.beginPath();x.arc(O+m.x/TS*S,m.y/TS*S,r,0,6.283);x.fill();});
+ MKS.forEach(m=>{if(m.med)return;x.fillStyle=m.kind==='hq'?'#6bcf63':m.kind==='willi'?'#e5604d':m.kind==='portal'?'#c06bff':m.kind==='buedchen'?'#46c2a0':m.kind==='scream'?'#ff5030':m.kind==='disco'?'#ff5fd0':'#f2b441';x.beginPath();x.arc(O+m.x/TS*S,m.y/TS*S,r,0,6.283);x.fill();});
  if(!G)return;
  if(!ZONE)G.active.forEach(m=>{const k=mTgt(m),mk=MKQ[k];if(!mk)return;x.strokeStyle='#fff';x.lineWidth=big?2:1.5;x.beginPath();x.arc(O+mk.x/TS*S,mk.y/TS*S,big?7:6,0,6.283);x.stroke();});
- aniMini(x,O,S,big);hideMini(x,O,S,big);
+ medMini(x,O,S,big,r);aniMini(x,O,S,big);hideMini(x,O,S,big);
  thugs.forEach(u=>{if(u.loot&&u.ko<=0){x.fillStyle='#ff2d55';x.fillRect(O+u.x/TS*S-3,u.y/TS*S-3,6,6);x.strokeStyle='#fff';x.lineWidth=1;x.strokeRect(O+u.x/TS*S-3,u.y/TS*S-3,6,6);}});
  if(ZONE&&ZONE.whale){x.fillStyle='#8fc7ff';x.beginPath();x.ellipse(O+ZONE.whale.x/TS*S,ZONE.whale.y/TS*S,7,3,0,0,6.283);x.fill();}
  chasers.forEach(u=>{x.fillStyle=Math.floor(timeNow*4)%2?'#ff3030':'#3070ff';x.fillRect(O+u.x/TS*S-2,u.y/TS*S-2,4,4);});
@@ -6531,7 +6537,7 @@ function mallePeds(z,add){
  add(14,[SW],q=>{q.x=24*TS+rf(-170,170);q.y=23*TS+rf(0,90);q.st='dance';q.stT=1e9;});
 }
 
-function myBeer(){return ['b_pils','b_koelsch','b_alt'].find(g=>(G.inv[g]||0)>0)||null;}
+function myBeer(){return ['b_pils','b_export','b_alt'].find(g=>(G.inv[g]||0)>0)||null;}
 function canSellPed(){return SELL.some(g=>(G.inv[g]||0)>0);}
 function pedWish(p){if(!p.wish)p.wish=pick(p.teen?MENUS.concat(['b_frei']):MENUS.concat(BEERS));return p.wish;}
 function pedWhy(p,g,ng,mn){
@@ -6551,7 +6557,7 @@ function pedOfferScreen(){
  const ng=inNoGo(P.x,P.y),mn=minorNear(P.x,P.y,120),w=pedWish(p);
  let b='',df=0;
  SELL.forEach(g=>{
-  const n=G.inv[g]||0;if(!n)return;
+  const n=G.inv[g]||0;if(!n||ILL[g]||(G.med&&(G.med.st||0)>=2))return;
   const why=pedWhy(p,g,ng,mn),fav=g===w;
   b+=btn(GOODS[g].n+(ILL[g]?' (illegal)':'')+': '+eur(pedPrice(g))+(fav?' ♥':''),'pSell',g,{off:!!why,why:why,cls:ILL[g]?'d':'',def:(!why&&!df&&(fav||!ILL[g]))?(df=1):0,note:'Dabei: '+n+(ILL[g]?' · Zivilstreifen möglich, die Polizei wird aufmerksam':'')});
  });
@@ -6564,7 +6570,7 @@ function pedSell(g){
  const p=UI.ped;if(!p||!GOODS[g])return;
  const why=pedWhy(p,g,inNoGo(P.x,P.y),minorNear(P.x,P.y,120));if(why){toast(why);return;}
  if((G.inv[g]||0)<1)return;
- if(ILL[g]){
+ if(ILL[g]){toast('Nee. Gras ist nur noch zum Genießen, dein Geschäft ist jetzt das Fernsehen.');return;
   if(chance(streetRisk(g))){
    G.inv[g]--;p.sold=1;heat(15);closeAll();addFx(p.x,p.y-24,'POLIZEI!','#6fa8ff',2);
    startWanted('Zivilstreife! '+p.nm+' zückt eine Dienstmarke. Weg hier!');return;
@@ -7517,11 +7523,11 @@ function shiftTargets(z){
 function pfoertnerMenu(){
  if(G.shift&&!inPlantFence(P.x,P.y))G.shift=null;
  const ban=G.planBan&&G.day<G.planBan,M=G.med||{};
- if(M.tower===2){mdl('Pförtner Bollmann','„Guten Tag, Chef! Der Turm sendet, das Lager ist voll, die Wachleute grüßen.“',[['Ins Lager und Sendezentrum','px:chef']]);return;}
+ if(M.tower===2){mdl('Pförtner Bollmann','„Guten Tag, Chef! Der Turm sendet, das Lager ist voll, die Wachleute grüßen.“',[['Ins Lager und Sendezentrum','px:chef'],['Untergrund-Premiere: Kinofilm über den Turm senden','yk:mq:tprem',!M.kf||!!M.prem]]);return;}
  const ch=[['Schicht als Techniker: 90 € Lohn','px:job',!!ban||!!G.shift]];
  if(G.tunnel===1)ch.push(['(Du kennst da einen Tunnel ...)','px:tip']);
- const can=medRankI()>=4;
- ch.push([can?'Den Turm übernehmen: 80.000 €':'Den Turm übernehmen (ab Rang Sender-Boss)','px:buy',!can||G.cash<80000]);
+ const can=medRankI()>=1&&(M.skill||0)>=2;
+ ch.push([can?'Den Turm übernehmen: 4.000 €':'Den Turm übernehmen (ab Kabelsalat-Azubi und Technik Stufe 2)','px:buy',!can||G.cash<4000]);
  mdl('Pförtner Bollmann','„Fernsehturm Rheinhanfen. Hier sendet die GlotzKonzern AG, und im Lager stehen Receiver, Antennen, Kabel und Fernseher. Zaun, Kameras, Wachleute. Mitarbeiter werden am Ausgang kontrolliert.“'+(ban?' Er schaut dich streng an: „Du hast hier bis Tag '+G.planBan+' Hausverbot.“':''),ch.concat([['Warum so viel Sicherheit?','px:why']]));
 }
 function ausgangMenu(){
@@ -8864,7 +8870,7 @@ KBEPS.forEach(e=>BEPS.push(e));
 
 const MHW={rec:{n:'Receiver',p:40,d:'Für jeden Anschluss einen (oder eine TV-Box)'},box:{n:'TV-Box',p:60,d:'Smart und schnell: +20 % Abo-Gebühr'},ant:{n:'Antenne',p:25,d:'Aufs Dach: schnell, aber Spürwagen können sie entdecken'},kab:{n:'Kabelrolle',p:15,d:'Heimlich verlegt: unsichtbar, nachts ohne Risiko'},tv:{n:'Fernseher',p:150,d:'Manche Kunden haben nur einen Röhrenfernseher'},tarn:{n:'Tarnset',p:30,d:'Macht aus einer Antenne einen Wäscheständer mit Socken'}};
 const MHWK=['rec','box','ant','kab','tv','tarn'];
-const MCT={m3u:{n:'M3U-Liste',p:50,s:3,d:3,ban:.3,k:'M3U'},stk:{n:'Stalker-Portal-Code',p:120,s:5,d:5,ban:.15,k:'STK'},xtr:{n:'Xtream-Code',p:220,s:10,d:6,ban:.1,k:'XTR'},eig:{n:'Selbst geknackt',s:4,d:5,ban:.12,k:'EIG'},mst:{n:'Master-Code',s:15,d:6,ban:.05,k:'MST'},turm:{n:'Turm-Code',s:60,d:9999,ban:0,k:'TURM'}};
+const MCT={m3u:{n:'M3U-Liste',p:50,s:3,d:3,ban:.3,k:'M3U'},stk:{n:'Stalker-Portal-Code',p:120,s:5,d:5,ban:.15,k:'STK'},xtr:{n:'Xtream-Code',p:220,s:10,d:6,ban:.1,k:'XTR',live:1},eig:{n:'Selbst geknackt',s:4,d:5,ban:.12,k:'EIG'},mst:{n:'Master-Code',s:15,d:6,ban:.05,k:'MST',live:1},turm:{n:'Turm-Code',s:60,d:9999,ban:0,k:'TURM',live:1}};
 const MRANK=[[0,'Kabelsalat-Azubi'],[20,'Antennen-Andi'],[60,'Code-Knacker'],[130,'Receiver-Royal'],[250,'Sender-Boss'],[450,'Entertain Master']];
 const MHN=['Familie Krause','Opa Heinz','WG Chaos','Frau Becker','Familie Yilmaz','Sportbar Anpfiff','Kegelclub Alle Neune','Herr Novak','Tante Gerda','Familie Schmitz','Studenten-WG Dosenpfand','Frau Albers','Herr Petersen','Familie Kowalski','Friseur Schnittig','Oma Hilde','Familie Nguyen','Herr Özdemir','Pension Rheinblick','Familie Weber','Kiosk-Opa Erwin','Frau Lindner','Familie Rossi','Musiker-WG Bassbude','Herr Bröselmann','Familie Jansen','Frau Pinkepank','Herr Wuschel','Familie Brösel','Tierarzt Dr. Fell'];
 const MWISH=['Fußball','Kochshows','Tierdokus','Krimis','Quizshows','Liebesfilme','Schlagerparty','Seifenkistenrennen','Serien am Stück','Zeichentrick für die Enkel','Wetterkanal (24 Stunden)','Heimwerker-Shows','Gartenzwerg-Weltmeisterschaft'];
@@ -8904,10 +8910,10 @@ const INSTL=['sieht zum ersten Mal Fußball in Farbe und ruft: „Der Rasen ist 
 let MHS=null,HK=null,HKI=null,MPAY=0,MPAYN=0;
 function medInit(){
  if(!G)return;
- if(!G.med)G.med={hw:{rec:1,box:0,ant:1,kab:1,tv:0,tarn:0},codes:[],films:[],subs:[],off:[],act:[],nid:1,skill:0,lic:{},fame:0,vids:[],neu:[],scr:0,hackT:0,tower:0,kino:0,auto:0,dreh:0,hr:-1,mark:null,loot:0};
+ if(!G.med)G.med={st:0,ruf:0,ver:0,slic:{},mk:{},hw:{rec:0,box:0,ant:0,kab:0,tv:0,tarn:0},codes:[],films:[],subs:[],off:[],act:[],nid:1,skill:0,lic:{},fame:0,vids:[],neu:[],scr:0,hackT:0,tower:0,kino:0,auto:0,dreh:0,hr:-1,mark:null,loot:0};
  const M=G.med;
- if(!M.codes.length&&!M.started){M.codes.push(mkCode('m3u'));M.films.push({f:4,q:'HD'});}
- M.started=1;
+ if(!M.started){M.films.push({f:4,q:'HD'});}
+ M.started=1;karInit(M);
  if(!M.neu.length)medNeu();
  MHWK.forEach(k=>{if(M.hw[k]===undefined)M.hw[k]=0;});
 }
@@ -8917,22 +8923,22 @@ function medHouses(){
  if(MHS)return MHS;
  const B=CITY.BLD,T=CITY.T,W=CITY.MW,out=[];
  B.forEach(b=>{if(b.k!=='house'||b.n)return;const dx=Math.floor(b.x+b.w/2),dy=b.y+b.h;if(T[dy*W+dx]!==SW)return;const x=dx*TS+16,y=dy*TS+14;if(out.length>=30||out.some(o=>Math.hypot(o.x-x,o.y-y)<4*TS))return;out.push({id:dx+'_'+dy,x:x,y:y,b:b});});
- out.forEach((h,i)=>{h.n=MHN[i%MHN.length];});
+ out.forEach((h,i)=>{h.n=MHN[i%MHN.length];h.v=/Sportbar|Kegelclub|Pension|Friseur/.test(h.n)?16:/WG/.test(h.n)?6:3+(i%3);});
  MHS=out;return out;
 }
 function mHouse(id){return medHouses().find(h=>h.id===id);}
 function mCode(id){return G.med.codes.find(c=>c.id===id);}
 function mUsed(c){return G.med.subs.filter(s=>s.c===c.id).length;}
 function mCodeOk(c){return c&&!c.ban&&c.d>0;}
-function medFreeCode(){let best=null;G.med.codes.forEach(c=>{if(!mCodeOk(c)||mUsed(c)>=c.s)return;if(!best||c.t==='turm'||(best.t!=='turm'&&c.d>best.d))best=c;});return best;}
+function medFreeCode(live){let best=null;G.med.codes.forEach(c=>{if(!mCodeOk(c)||mUsed(c)>=c.s||(live&&!MCT[c.t].live))return;if(!best||c.t==='turm'||(best.t!=='turm'&&c.d>best.d))best=c;});return best;}
 function mSlots(){let f=0,t=0;G.med.codes.forEach(c=>{if(mCodeOk(c)){t+=c.s;f+=Math.max(0,c.s-mUsed(c));}});return{f:f,t:t};}
 function medFame(){return Math.floor((G&&G.med&&G.med.fame)||0);}
-function medRankI(){const f=medFame();let i=0;MRANK.forEach((r,k)=>{if(f>=r[0])i=k;});return i;}
-function medRank(){return MRANK[medRankI()][1];}
-function medRankPct(){const i=medRankI();if(i>=MRANK.length-1)return 100;const a=MRANK[i][0],b=MRANK[i+1][0];return Math.round((medFame()-a)/(b-a)*100);}
-function fameAdd(v){if(!G.med)return;const r0=medRankI();G.med.fame=Math.max(0,(G.med.fame||0)+v);const r1=medRankI();if(r1>r0){sfx('win');toast('Neuer Rang: '+MRANK[r1][1]+'! '+(r1===MRANK.length-1?'Du bist der Entertain Master! In Hollyhanf wartet dein Stern auf dem Walk of Fame.':'Ganz Rheinhanfen redet über dich.'));if(r1===MRANK.length-1)G.med.star=1;}}
+function medRankI(){return (G&&G.med&&G.med.st)||0;}
+function medRank(){return MSTUFE[medRankI()].n;}
+function medRankPct(){return karPct();}
+function fameAdd(v){if(!G||!G.med)return;G.med.fame=Math.max(0,(G.med.fame||0)+v);}
 function medSubsOk(){return G.med.subs.filter(s=>s.ok).length;}
-function medDayFee(){return G.med.subs.reduce((a,s)=>a+(s.ok?s.fee:0),0);}
+function medDayFee(){const M=G.med,pm=1+Math.min(.4,prog()*.02),rm=1+Math.min(.5,(M.ruf||0)/100);return Math.round(M.subs.reduce((a,s)=>a+(s.ok?s.fee*(s.legal?rm:1):0),0)*pm);}
 function medSum(){if(!G||!G.med)return '';const n=G.med.subs.length,b=n-medSubsOk();return n+' Kunden'+(b?' ('+b+' mit Störung)':'')+' · '+eur(medDayFee())+' pro Tag';}
 function medNeu(){const L=FILMS.map((f,i)=>i).filter(i=>!FILMS[i].s);const out=[];while(out.length<3){const i=pick(L);if(out.indexOf(i)<0)out.push(i);}G.med.neu=out;}
 function medHasFilm(f){return G.med.films.find(x=>x.f===f);}
@@ -8942,14 +8948,14 @@ function medSync(){
  if(!G||!G.med)return;
  const add=(h,col,act)=>M.push({id:'tv_'+h.id,dist:'',kind:'sk',sk:'tvh',hid:h.id,med:1,x:h.x,y:h.y+2,n:h.n,col:col,act:act});
  const seen={};
- G.med.act.forEach(j=>{const h=mHouse(j.h);if(h&&!seen[h.id]){seen[h.id]=1;add(h,j.t==='film'?'#c08aff':j.t==='legal'?'#7ad35a':'#5fd0ff',h.n+': '+(j.t==='film'?'Film bringen':'Fernsehen einrichten'));}});
+ G.med.act.forEach(j=>{const h=mHouse(j.h);if(h&&!seen[h.id]){seen[h.id]=1;add(h,MCOL[j.t]||MCOL.neu,h.n+': '+(j.t==='film'?'Film bringen':'Fernsehen einrichten'));}});
  G.med.subs.forEach(s=>{if(s.ok||seen[s.h])return;const h=mHouse(s.h);if(h){seen[h.id]=1;add(h,'#ff5f5f',h.n+': Bild weg!');}});
  if(G.med.mark&&!seen[G.med.mark]){const h=mHouse(G.med.mark);if(h)add(h,'#ffd23f',h.n+': Kunde besuchen');}
 }
 function medMkOffer(){
  const M=G.med,H=medHouses();
  const busy=new Set(M.subs.map(s=>s.h).concat(M.act.map(j=>j.h),M.off.map(o=>o.h)));
- const lic=M.lic.f||M.lic.s||M.lic.l;
+ const lic=M.slic&&M.slic.rh;
  let t=pick(['neu','neu','neu','film','film'].concat(lic?['legal','legal']:[]));
  const pool=t==='film'?H.filter(h=>!M.act.some(j=>j.h===h.id)&&!M.off.some(o=>o.h===h.id)):H.filter(h=>!busy.has(h.id));
  if(!pool.length)return null;
@@ -8962,13 +8968,13 @@ function medMkOffer(){
 function medFill(){const M=G.med;M.off=M.off.filter(o=>o.dl>=G.day);let n=0;while(M.off.length<4&&n++<10){const o=medMkOffer();if(o)M.off.push(o);}}
 function medOfferTxt(o){const h=mHouse(o.h),n=h?h.n:'Jemand';
  if(o.t==='film')return n+' will den Film „'+FILMS[o.f].ti+'“ auf einem Stick. Lohn '+eur(o.rw)+'.';
- if(o.t==='legal')return n+' will legal: '+o.w+'. Einrichten '+eur(o.rw)+', danach '+eur(o.fee)+' pro Tag. Braucht eine Lizenz.';
+ if(o.t==='legal')return n+' will legal: '+o.w+'. Einrichten '+eur(o.rw)+', danach '+eur(o.fee)+' pro Tag. Braucht die Sendelizenz.';
  return n+' will alle Sender, vor allem '+o.w+'. Einrichten '+eur(o.rw)+', danach '+eur(o.fee)+' pro Tag'+(o.tv?'. Hat nur einen Röhrenfernseher.':'.');}
 function medAccept(id){
  const M=G.med;if(M.act.length>=4)return{ok:false,msg:'Du kannst nur 4 Medien-Aufträge gleichzeitig führen.'};
  const i=M.off.findIndex(o=>o.id===id);if(i<0)return{ok:false,msg:'Angebot nicht mehr da.'};
  const o=M.off.splice(i,1)[0];M.act.push(o);medSync();
- return{ok:true,msg:'Angenommen! '+(mHouse(o.h)||{n:''}).n+' ist jetzt auf der Karte markiert.'};
+ return{ok:true,msg:'Angenommen! '+(mHouse(o.h)||{n:''}).n+': '+(mHouse(o.h)?mWhere(mHouse(o.h)):'')+'. Weißer Ring auf der Karte, der Pfeil am Bildrand zeigt den Weg.'};
 }
 function medAbandon(id){const M=G.med,i=M.act.findIndex(o=>o.id===id);if(i<0)return{ok:false,msg:''};M.act.splice(i,1);popAdd(-1);medSync();return{ok:true,msg:'Auftrag abgesagt. Die Kundschaft ist enttäuscht (-1 Beliebtheit).'};}
 function medNeed(j,typ){
@@ -8976,7 +8982,7 @@ function medNeed(j,typ){
  if(hw.rec+hw.box<1)L.push('Receiver oder TV-Box');
  if(typ==='ant'&&hw.ant<1)L.push('Antenne');
  if(typ==='kab'&&hw.kab<1)L.push('Kabelrolle');
- if(typ==='leg'){if(!(G.med.lic.f||G.med.lic.s||G.med.lic.l))L.push('eine Lizenz');if(hw.ant+hw.kab<1)L.push('Antenne oder Kabel');}
+ if(typ==='leg'){if(!(G.med.slic&&G.med.slic.rh))L.push('Sendelizenz (Amt für Alles)');if(hw.ant+hw.kab<1)L.push('Antenne oder Kabel');}
  else if(!medFreeCode())L.push('einen Code mit freiem Platz');
  return L;
 }
@@ -8988,7 +8994,7 @@ function medHouseMenu(hid){
   const na=medNeed(j,'ant'),nk=medNeed(j,'kab'),nl=medNeed(j,'leg'),night=hour()>=20||hour()<6;
   const ch=[];
   if(j.t==='neu'){ch.push(['Antenne aufs Dach: schnell, aber auffällig'+(na.length?' (fehlt: '+na.join(', ')+')':''),'yk:mi:ant',na.length>0]);ch.push(['Kabel heimlich verlegen: unsichtbar'+(night?', nachts ohne Risiko':', tagsüber etwas riskant')+(nk.length?' (fehlt: '+nk.join(', ')+')':''),'yk:mi:kab',nk.length>0]);}
-  ch.push(['Legal anschließen mit Lizenz: kein Risiko, weniger Geld'+(nl.length?' (fehlt: '+nl.join(', ')+')':''),'yk:mi:leg',nl.length>0]);
+  ch.push(['Legal anschließen mit Sendelizenz: kein Risiko, bringt Ruf'+(nl.length?' (fehlt: '+nl.join(', ')+')':''),'yk:mi:leg',nl.length>0]);
   mdl(h.n,h.n+' wünscht sich '+(j.t==='legal'?j.w:'alle Sender, vor allem '+j.w)+'.'+(j.tv?' Im Wohnzimmer steht ein Röhrenfernseher von 1983. Ein neuer Fernseher bringt Bonus.':'')+' Lager: '+medHwLine()+'.',ch);return;
  }
  if(j&&j.t==='film'){
@@ -9000,7 +9006,7 @@ function medHouseMenu(hid){
   mdl(h.n,h.n+' steht vor dem Fernseher und zeigt auf das Rauschen: „Bild weg! Mitten im Finale!“ '+(need?'Der alte Code ist gesperrt oder abgelaufen.':'Die Box hängt.'),[[need?'Neuen Code einspielen'+(fc?'':' (kein freier Code)'):'Box neu starten','yk:mi:fix',need&&!fc]]);return;
  }
  if(s){
-  const ch=[['Hallo sagen und Kaffee trinken','yk:mi:hallo']];
+  const ch=[['Hallo sagen und Kaffee trinken','yk:mi:hallo']];if(!s.legal)ch.push(['Auf legal umstellen'+(M.slic.rh?': bringt Ruf, senkt Verdacht':' (fehlt: Sendelizenz)'),'yk:mq:hconv',!M.slic.rh]);
   if(s.typ==='ant'&&!s.tarn&&!s.legal)ch.push(['Antenne tarnen (Tarnset)'+(M.hw.tarn?'':' (fehlt: Tarnset)'),'yk:mi:tarn',!M.hw.tarn]);
   if(s.typ==='ant'&&!s.box&&M.hw.box)ch.push(['Auf TV-Box umrüsten (+20 %)','yk:mi:box']);
   mdl(h.n,h.n+' ist Kunde seit Tag '+s.since+'. '+(s.legal?'Alles legal.':s.typ==='kab'?'Per Kabel angeschlossen, unsichtbar.':s.tarn?'Antenne getarnt als Wäscheständer.':'Antenne gut sichtbar auf dem Dach.')+' Zahlt '+eur(s.fee)+' pro Tag.',ch);return;
@@ -9025,11 +9031,11 @@ function medInstallDone(j,typ){
  const fee=Math.round(j.fee*(box?1.2:1)*(legal?.8:1)*(j.tv&&!tvb?.8:1));
  M.subs.push({h:j.h,c:legal?'legal':code.id,typ:ct,fee:fee,ok:true,box:box,tarn:false,legal:legal,since:G.day});
  M.act=M.act.filter(o=>o!==j);
- const rw=j.rw+tvb;G.cash+=rw;G.stats.earned+=rw;fameAdd(legal?4:3);xpAdd(8);popAdd(1);sfx('coin');
+ const rw=j.rw+tvb;G.cash+=rw;G.stats.earned+=rw;fameAdd(legal?4:3);xpAdd(8);popAdd(1);sfx('coin');if(legal)rufAdd(3);else verAdd(typ==='ant'?2:1,true);
  let risk='';
  if(!legal){
   const night=hour()>=20||hour()<6,cop=copNear(P.x,P.y,260),sp=traffic.some(c=>c.spuer&&Math.hypot(c.x-P.x,c.y-P.y)<240);
-  if(typ==='ant'){if(cop){heat(26);risk=' Aber ein Polizist hat dich auf dem Dach gesehen!';}else if(sp){heat(14);risk=' Ein Spürwagen piepst in der Nähe. Fahndung steigt.';}else heat(3);}
+  if(typ==='ant'){if(cop){heat(26);verAdd(8,true);risk=' Aber ein Polizist hat dich auf dem Dach gesehen! Verdacht +8 %.';}else if(sp){heat(14);verAdd(5,true);risk=' Ein Spürwagen piepst in der Nähe. Verdacht +5 %.';}else heat(3);}
   else if(!night){if(cop){heat(12);risk=' Ein Polizist wundert sich über dein Kabel.';}else heat(2);}
  }
  medSync();
@@ -9049,20 +9055,20 @@ function medDay(L){
  dead.forEach(c=>{const n=M.subs.filter(s=>s.c===c.id);n.forEach(s=>medBreak(s,'code'));if(n.length)L.push(MCT[c.t].n+' '+c.n+(c.ban?' wurde gesperrt':' ist abgelaufen')+'. Bei '+n.length+' Kunden ist das Bild weg!');});
  M.codes=M.codes.filter(c=>mCodeOk(c)||M.subs.some(s=>s.c===c.id&&s.ok));
  const gone=M.subs.filter(s=>!s.ok&&s.bd!==undefined&&G.day-s.bd>=2);
- gone.forEach(s=>{const h=mHouse(s.h);L.push((h?h.n:'Ein Kunde')+' hat gekündigt: zu lange kein Bild.');popAdd(-1);});
+ gone.forEach(s=>{const h=mPlace(s.h);L.push((h?h.n:'Ein Kunde')+' hat gekündigt: zu lange kein Bild.');popAdd(-1);});
  M.subs=M.subs.filter(s=>gone.indexOf(s)<0);
  let inc=0,txt=[];
- if(M.kino){const v=Math.round(500*(1+.4*((M.lic.f?1:0)+(M.lic.s?1:0)+(M.lic.l?1:0)))+(M.kinoSchwarz?300:0));inc+=v;txt.push('Kino '+eur(v));if(M.kinoSchwarz){heat(5);if(chance(.15)){inc-=800;txt.push('Razzia im Kino: -800 € Strafe');}}}
+ if(M.kino){const v=Math.round(500*(1+.4*((M.lic.f?1:0)+(M.lic.s?1:0)+(M.lic.l?1:0)))+(M.kinoSchwarz?300:0));inc+=v;txt.push('Kino '+eur(v));if(M.kinoSchwarz){if(chance(.1)){inc-=500;txt.push('Kontrolle im Kino: -500 € Strafe');}}}
  if(M.auto){const v=Math.round(350*(1+.3*((M.lic.f?1:0)+(M.lic.s?1:0))));inc+=v;txt.push('Autokino '+eur(v));}
  M.vids.forEach(v=>{const age=G.day-v.day;v.v=Math.round(age<3?v.v+v.st*v.st*60:v.v*.82);const e=Math.round(v.v*.04);inc+=e;});
  if(M.vids.length)txt.push('Videos '+eur(Math.round(M.vids.reduce((a,v)=>a+v.v*.04,0))));
  if(inc){G.cash+=inc;G.stats.earned+=Math.max(0,inc);L.push('Medien-Einnahmen: '+txt.join(', ')+'.');}
  if(M.tower===2){MHWK.forEach(k=>{if(k!=='tarn'&&k!=='tv')M.hw[k]=Math.min(30,M.hw[k]+3);});M.hw.tv=Math.min(10,M.hw.tv+1);fameAdd(5);L.push('Das Lager im Fernsehturm wurde aufgefüllt.');}
- medNeu();M.off=[];medFill();medSync();
+ karDay(L);medNeu();M.off=[];medFill();medSync();
  L.push('Neu im Kino: '+M.neu.map(i=>FILMS[i].ti).join(', ')+'.');
 }
 function medTick(dt){
- if(!G)return;medInit();
+ if(!G)return;medInit();karTick(dt);
  const M=G.med;
  if(!traffic.some(c=>c.spuer)){traffic.filter(c=>!c.cop).slice(0,2).forEach(c=>{c.spuer=true;c.col='#6c7a89';});}
  if(!M.sync){M.sync=1;medFill();if(!ZONE)medSync();}
@@ -9074,13 +9080,13 @@ function medTick(dt){
   M.hr=hr;
   const f=Math.round(medDayFee()/24);if(f>0){G.cash+=f;G.stats.earned+=f;MPAY+=f;MPAYN++;}
   if(MPAYN>=3&&MPAY>0){toast('Abo-Kasse: +'+eur(MPAY)+' von '+medSubsOk()+' Kunden.');MPAY=0;MPAYN=0;}
-  if(M.subs.length&&chance(.05)){const s=pick(M.subs.filter(x=>x.ok));if(s){medBreak(s,'box');const h=mHouse(s.h);toast('Störung: Bei '+(h?h.n:'einem Kunden')+' hängt die Box. Bild weg!');if(!ZONE)medSync();}}
+  if(M.subs.length&&chance(.05)){const s=pick(M.subs.filter(x=>x.ok));if(s){medBreak(s,'box');mktSync();const h=mPlace(s.h);toast('Störung: Bei '+(h?h.n:'einem Kunden')+' hängt die Box. Bild weg!');if(!ZONE)medSync();}}
   G.offT2=(G.offT2||0)+1;if(G.offT2>=1){G.offT2=0;medFill();}
  }
  if(!ZONE){
   traffic.forEach(c=>{if(!c.spuer)return;
    if(Math.hypot(c.x-P.x,c.y-P.y)<300&&chance(dt*.5))addFx(c.x,c.y-20,'Piep … piep …','#9fd8ff',.9);
-   M.subs.forEach(s=>{if(s.typ!=='ant'||s.tarn||s.legal)return;const h=mHouse(s.h);if(!h||Math.hypot(h.x-c.x,h.y-c.y)>130)return;if(chance(dt*.06)){M.subs=M.subs.filter(x=>x!==s);heat(6);popAdd(-1);medSync();toast('Ein Signal-Spürwagen hat die Antenne bei '+h.n+' entdeckt und abgebaut. Kunde futsch! (Tipp: Tarnset)');}});
+   M.subs.forEach(s=>{if(s.typ!=='ant'||s.tarn||s.legal)return;const h=mHouse(s.h);if(!h||Math.hypot(h.x-c.x,h.y-c.y)>130)return;if(chance(dt*.06*(.5+(M.ver||0)/100))){M.subs=M.subs.filter(x=>x!==s);heat(6);verAdd(5,true);popAdd(-1);medSync();toast('Ein Signal-Spürwagen hat die Antenne bei '+h.n+' entdeckt und abgebaut. Kunde futsch! (Tipp: Tarnset)');}});
   });
  }
 }
@@ -9101,6 +9107,7 @@ function medWatch(f,q,where){
 }
 const MEDS={med:1,medjobs:1,medsubs:1,medcodes:1,medfilms:1,medpc:1,hack:1,medshop:1,netz:1,kino:1};
 function medBack(s){
+ if(s==='kar'){const f=UI.karFrom;UI.karFrom=null;if(f&&f!=='kar'&&SCREENS[f])show(f);else closeAll();return;}
  if(s==='hack'){medHackStop();show('medpc');return;}
  if(s==='medjobs'||s==='medsubs'||s==='medcodes'){show('med');return;}
  if(s==='medfilms'){show(UI.filmFrom||'med');return;}
@@ -9112,21 +9119,21 @@ function mHd(t,sub){return '<div class="hd"><h2>'+t+'</h2>'+(sub?'<div class="mu
 const MEDSCR={
  med(){
   const M=G.med,sl=mSlots(),ri=medRankI();
-  const sub='Rang: <b class="am">'+medRank()+'</b> · Ruhm '+medFame()+(ri<MRANK.length-1?' (nächster Rang ab '+MRANK[ri+1][0]+')':'')+'<br>'+medSum()+'<br>Codes: '+sl.f+' freie von '+sl.t+' Plätzen · Hacker-Wissen Stufe '+M.skill+(M.lic.f||M.lic.s||M.lic.l?' · Lizenzen: '+['f','s','l'].filter(k=>M.lic[k]).map(k=>({f:'Film',s:'Serien',l:'Live-TV'})[k]).join(', '):'')+'<br>Lager: '+medHwLine();
-  let b=btn('Medien-Aufträge ('+M.act.length+' / 4 aktiv, '+M.off.length+' neu)','medGo','medjobs',{def:1})+btn('Kunden ('+M.subs.length+')','medGo','medsubs')+btn('Codes ('+M.codes.length+')','medGo','medcodes')+btn('Filme und Serien ('+M.films.length+')','medFilms','med');
-  b+='<div class="b" style="opacity:.8">Hacker-PC: im Imbiss-Hinterzimmer, in deiner Wohnung oder im Netzcafé. Hardware: Elektro-Ramsch. Codes und Hacker-Kurse: Netzcafé Pixelhöhle.</div>';
+  const sub='Titel: <b class="am">'+medRank()+'</b> · '+zus()+' Zuschauer · <span class="gr">Ruf '+Math.round(M.ruf||0)+'</span> · <span class="rd">Verdacht '+(M.ver||0)+' %</span><br>'+medSum()+'<br>Programm: '+prog()+' Titel · Codes: '+sl.f+' freie von '+sl.t+' Plätzen · Technik Stufe '+M.skill+'<br>Lizenzen: '+([M.slic.rh?'Sendelizenz':'',M.slic.eu?'Euro-Sendelizenz':'',M.lic.f?'Film':'',M.lic.s?'Serien':'',M.lic.l?'Live-TV':''].filter(x=>x).join(', ')||'keine')+' · Lager: '+medHwLine()+medMapNav();
+  let b=btn('Medien-Aufträge ('+M.act.length+' / 4 aktiv, '+M.off.length+' neu)','medGo','medjobs',{def:1})+btn('Karriere: Ziel und Tipps','karS')+btn('Kunden ('+M.subs.length+')','medGo','medsubs')+btn('Codes ('+M.codes.length+')','medGo','medcodes')+btn('Filme und Serien ('+M.films.length+')','medFilms','med');
+  b+='<div class="b" style="opacity:.8">Hardware: Elektro-Ramsch. Codes und Technik-Kurse: Netzcafé Pixelhöhle. Sendelizenzen: Amt für Alles. Filmrechte und Kinofilme: Hollyhanf. Shows: Studio Senderviertel.</div>';
   return{hint:'Pfeiltasten: wählen · OK: öffnen · Zurück: schließen',html:'<div class="place" style="max-width:48rem">'+mHd('Medien-Zentrale',sub)+b+btn('Zurück','back')+'</div>'};
  },
  medjobs(){
   const M=G.med;let b='';
-  M.act.forEach(o=>{b+=btn('✓ '+medOfferTxt(o),'medAb',o.id,{note:'Aktiv. Auf der Karte markiert. OK: absagen'});});
-  M.off.forEach((o,i)=>{b+=btn(medOfferTxt(o),'medAcc',o.id,{def:i===0,off:M.act.length>=4,why:'Du hast schon 4 Aufträge.'});});
+  M.act.forEach(o=>{b+=btn('✓ '+medOfferTxt(o),'medJob',o.id,{note:'Aktiv · '+(mHouse(o.h)?mWhere(mHouse(o.h)):'')+' · OK: Navi starten oder absagen'});});
+  M.off.forEach((o,i)=>{b+=btn(medOfferTxt(o),'medAcc',o.id,{def:i===0,off:M.act.length>=4,why:'Du hast schon 4 Aufträge.',note:'Neu · '+(mHouse(o.h)?mWhere(mHouse(o.h)):'')+' · OK: annehmen'});});
   if(!b)b='<div class="b">Gerade keine Anfragen. Bald melden sich neue Leute.</div>';
   return{hint:'OK: annehmen oder absagen · Zurück',html:'<div class="place" style="max-width:52rem">'+mHd('Medien-Aufträge','Neukunden, Film-Wünsche und legale Anschlüsse. Höchstens 4 gleichzeitig.')+b+btn('Zurück','back')+'</div>'};
  },
  medsubs(){
   const M=G.med;let b='';
-  M.subs.forEach((s,i)=>{const h=mHouse(s.h),c=mCode(s.c);b+=btn((s.ok?'':'⚠ ')+(h?h.n:'?')+': '+eur(s.fee)+' pro Tag','medMark',s.h,{def:i===0,note:(s.ok?'Läuft':'Bild weg! '+(s.why==='code'?'Neuer Code nötig':'Box hängt'))+' · '+(s.legal?'legal':s.typ==='kab'?'Kabel':s.tarn?'Antenne getarnt':'Antenne sichtbar')+(c?' · '+c.n:'')+' · OK: auf der Karte markieren'});});
+  M.subs.forEach((s,i)=>{const h=mPlace(s.h),c=mCode(s.c);b+=btn((s.ok?'':'⚠ ')+(h?h.n:'?')+': '+eur(s.fee)+' pro Tag','medMark',s.h,{def:i===0,note:(s.ok?'Läuft':'Bild weg! '+(s.why==='code'?'Neuer Code nötig':'Box hängt'))+' · '+(s.legal?'legal':s.typ==='kab'?'Kabel':s.tarn?'Antenne getarnt':'Antenne sichtbar')+(c?' · '+c.n:'')+' · '+(h?mWhere(h):'')+' · OK: Navi dorthin'});});
   if(!b)b='<div class="b">Noch keine Kunden. Nimm einen Medien-Auftrag an!</div>';
   return{hint:'OK: Kunde auf der Karte markieren · Zurück',html:'<div class="place" style="max-width:48rem">'+mHd('Deine Kunden',medSum())+b+btn('Zurück','back')+'</div>'};
  },
@@ -9144,7 +9151,7 @@ const MEDSCR={
  },
  medpc(){
   const M=G.med;
-  let b=btn(M.skill<1?'Code knacken (erst Hacker-Kurs im Netzcafé)':M.hackT>0?'Code knacken (Lüfter kühlt noch '+Math.ceil(M.hackT)+' s)':'Code knacken (Minispiel)','hackGo',null,{off:M.skill<1||M.hackT>0,def:M.skill>=1&&M.hackT<=0,why:M.skill<1?'Lern erst bei Pixel-Paule im Netzcafé.':'Der PC muss abkühlen.',note:'Drei Mal genau im grünen Feld drücken. Daneben: Alarm, Fahndung steigt'});
+  let b=btn(M.skill<1?'Code knacken (erst Technik-Kurs im Netzcafé)':M.hackT>0?'Code knacken (Lüfter kühlt noch '+Math.ceil(M.hackT)+' s)':'Code knacken (Minispiel)','hackGo',null,{off:M.skill<1||M.hackT>0,def:M.skill>=1&&M.hackT<=0,why:M.skill<1?'Lern erst bei Pixel-Paule im Netzcafé.':'Der PC muss abkühlen.',note:'Drei Mal genau im grünen Feld drücken. Daneben: Alarm, Fahndung steigt'});
   b+=btn(M.scr>0?'Scraper läuft … noch '+Math.ceil(M.scr)+' s':'Scraper starten: sucht neue Filme und Serien','medScr',null,{off:M.scr>0,why:'Der Scraper läuft schon.',def:M.skill<1,note:'Dauert etwa anderthalb Minuten, läuft im Hintergrund'});
   b+=btn('Film schauen ('+M.films.length+')','medFilms','medpc');
   b+=btn('Medien-Zentrale','medGo','med');
@@ -9152,7 +9159,7 @@ const MEDSCR={
  },
  hack(){
   const z=HK;if(!z)return{html:''};
-  return{hint:'OK: genau im grünen Feld drücken · Zurück: abbrechen',html:'<div class="place" style="max-width:40rem">'+mHd('Code knacken','Runde '+(z.hits+1)+' von 3 · Hacker-Wissen Stufe '+G.med.skill)+'<div style="position:relative;height:2.4rem;background:#14202c;border:2px solid var(--ln);border-radius:.4rem;margin:1rem 0;overflow:hidden"><div style="position:absolute;left:'+(z.a*100)+'%;width:'+((z.b-z.a)*100)+'%;top:0;bottom:0;background:rgba(122,211,90,.55)"></div><div id="hkcur" style="position:absolute;left:'+(z.pos*100)+'%;top:0;bottom:0;width:.55rem;background:#ffd23f;box-shadow:0 0 .5rem #ffd23f"></div></div><pre style="font-size:.85rem;color:#7ad35a;min-height:4rem;white-space:pre-wrap;margin:0 0 .6rem">'+z.log+'</pre>'+btn('Jetzt!','hackHit',null,{def:1})+'</div>'};
+  return{hint:'OK: genau im grünen Feld drücken · Zurück: abbrechen',html:'<div class="place" style="max-width:40rem">'+mHd('Code knacken','Runde '+(z.hits+1)+' von 3 · Technik Stufe '+G.med.skill)+'<div style="position:relative;height:2.4rem;background:#14202c;border:2px solid var(--ln);border-radius:.4rem;margin:1rem 0;overflow:hidden"><div style="position:absolute;left:'+(z.a*100)+'%;width:'+((z.b-z.a)*100)+'%;top:0;bottom:0;background:rgba(122,211,90,.55)"></div><div id="hkcur" style="position:absolute;left:'+(z.pos*100)+'%;top:0;bottom:0;width:.55rem;background:#ffd23f;box-shadow:0 0 .5rem #ffd23f"></div></div><pre style="font-size:.85rem;color:#7ad35a;min-height:4rem;white-space:pre-wrap;margin:0 0 .6rem">'+z.log+'</pre>'+btn('Jetzt!','hackHit',null,{def:1})+'</div>'};
  },
  medshop(){
   const M=G.med;let b='';
@@ -9161,10 +9168,10 @@ const MEDSCR={
  },
  netz(){
   const M=G.med;let b='';
-  ['m3u','stk','xtr'].forEach((t,i)=>{const c=MCT[t];b+=btn(c.n+': '+eur(c.p),'medCode',t,{def:i===0,off:G.cash<c.p,why:'Nicht genug Geld.',note:c.s+' Kunden, etwa '+c.d+' Tage, Sperr-Risiko '+(c.ban>=.3?'hoch':c.ban>=.15?'mittel':'gering')});});
+  ['m3u','stk','xtr'].forEach((t,i)=>{const c=MCT[t];b+=btn(c.n+': '+eur(c.p),'medCode',t,{def:i===0,off:G.cash<c.p,why:'Nicht genug Geld.',note:c.s+' Kunden, etwa '+c.d+' Tage, Sperr-Risiko '+(c.ban>=.3?'hoch':c.ban>=.15?'mittel':'gering')+(c.live?' · mit Live-TV':' · ohne Live-TV')});});
   const L=[150,300,600,1000,1600];
-  if(M.skill<5)b+=btn('Hacker-Kurs Stufe '+(M.skill+1)+': '+eur(L[M.skill]),'medKurs',null,{off:G.cash<L[M.skill],why:'Nicht genug Geld.',note:M.skill<1?'Danach kannst du am Hacker-PC selbst Codes knacken':'Weniger Sperren, bessere Codes, schärferer Scraper'});
-  else b+='<div class="b">Hacker-Wissen: Meisterstufe. Pixel-Paule nennt dich jetzt „Chef“.</div>';
+  if(M.skill<5)b+=btn('Technik-Kurs Stufe '+(M.skill+1)+': '+eur(L[M.skill]),'medKurs',null,{off:G.cash<L[M.skill],why:'Nicht genug Geld.',note:M.skill<1?'Technik 1: Codes am Hacker-PC knacken und Märkte im Ausland anschließen':M.skill<2?'Technik 2: Fernsehturm bedienen und übernehmen':'Weniger Sperren, bessere Codes, schärferer Scraper'});
+  else b+='<div class="b">Technik: Meisterstufe. Pixel-Paule nennt dich jetzt „Chef“.</div>';
   b+=btn('PC mieten: 5 € (Hacker-PC)','medRent',null,{off:G.cash<5,why:'Nicht genug Geld.'});
   b+=btn('Film tauschen bei Ferdi ('+M.films.length+(M.films.length===1?' Film)':' Filme)'),'medTausch',null,{off:!M.films.length,why:'Du hast nichts zum Tauschen.',note:'Ferdi gibt dir einen anderen Film für einen von deinen'});
   return{hint:'OK: kaufen · Zurück',html:'<div class="place" style="max-width:46rem">'+mHd('Netzcafé Pixelhöhle','Pixel-Paule hat einen Bart bis zur Tastatur: „Codes, Kurse, Kaffee. Alles erfunden, nichts davon funktioniert im echten Leben. Nur der Kaffee.“ Bargeld '+eur(G.cash))+b+btn('Zurück','back')+'</div>'};
@@ -9173,8 +9180,8 @@ const MEDSCR={
   const M=G.med;let b='';
   M.neu.forEach((f,i)=>{b+=btn('„'+FILMS[f].ti+'“ · '+FILMS[f].g+': 8 €','kinoW',f,{def:i===0,off:G.cash<8,why:'Nicht genug Geld.',note:FILMS[f].p});});
   b+=btn('Popcorn und Brause: 5 €','kinoPop',null,{off:G.cash<5,why:'Nicht genug Geld.'});
-  if(!M.kino)b+=btn('Kino kaufen: 40.000 €','kinoBuy',null,{off:G.cash<40000,why:'Nicht genug Geld.',note:'Bringt jeden Tag Geld, mit Lizenzen mehr'});
-  else b+=btn(M.kinoSchwarz?'Programm: Schwarzvorführungen (umstellen auf legal)':'Programm: legal (umstellen auf Schwarzvorführungen)','kinoMode',null,{note:M.kinoSchwarz?'Mehr Geld, aber Fahndung und Razzia-Gefahr':'Sicher, mit Lizenzen mehr Geld'});
+  if(!M.kino)b+=btn('Kino kaufen: 3.000 €','kinoBuy',null,{off:G.cash<3000,why:'Nicht genug Geld.',note:'Bringt jeden Tag Geld, Ruf und 60 Zuschauer. Mit Lizenzen mehr.'});
+  else b+=btn(M.kinoSchwarz?'Programm: Schwarzvorführungen (umstellen auf legal)':'Programm: legal (umstellen auf Schwarzvorführungen)','kinoMode',null,{note:M.kinoSchwarz?'Mehr Geld, aber der Verdacht steigt jeden Tag':'Sicher, mit Lizenzen mehr Geld'});
   return{hint:'OK: Film schauen · Zurück',html:'<div class="place" style="max-width:48rem">'+mHd('Kino Flimmerpalast',(M.kino?'Dein Kino! ':'')+'Rote Samtsitze, klebriger Boden, und der Vorführer schläft bei jedem Film ein. Neu im Kino:')+b+btn('Zurück','back')+'</div>'};
  }
 };
@@ -9189,10 +9196,10 @@ function medHackHit(){
  const z=HK;if(!z)return;
  if(z.pos+.012>=z.a&&z.pos<=z.b){
   z.hits++;sfx('tick');z.log+='\n> '+pick(['Käse-Verschlüsselung geknackt.','Passwort war „passwort“. Peinlich.','Wachhund-Programm mit Wurst abgelenkt.','Server in Wuppertal umgeleitet.','Firewall hat Feierabend.']);
-  if(z.hits>=3){medHackStop();const c=mkCode('eig');G.med.codes.push(c);G.med.hackT=120;fameAdd(3);xpAdd(10);sfx('win');HK=null;show('medpc');showModal({title:'Geknackt!',text:'Neuer Code: '+c.n+' für '+c.s+' Kunden, etwa '+c.d+' Tage. Natürlich alles nur ausgedacht.',choices:[{label:'Weiter',a:'mclose'}]});return;}
+  if(z.hits>=3){medHackStop();const c=mkCode('eig');G.med.codes.push(c);G.med.hackT=120;fameAdd(3);verAdd(2,true);xpAdd(10);sfx('win');HK=null;show('medpc');showModal({title:'Geknackt!',text:'Neuer Code: '+c.n+' für '+c.s+' Kunden, etwa '+c.d+' Tage. Natürlich alles nur ausgedacht.',choices:[{label:'Weiter',a:'mclose'}]});return;}
   z.sp+=.25;medHackZone();render2();
  }else{
-  medHackStop();HK=null;G.med.hackT=60;heat(12);sfx('bonk');show('medpc');toast('ALARM! Rückverfolgung läuft! Du ziehst den Stecker. Die Fahndung steigt.');
+  medHackStop();HK=null;G.med.hackT=60;heat(12);verAdd(8,true);sfx('bonk');show('medpc');toast('ALARM! Rückverfolgung läuft! Du ziehst den Stecker. Die Fahndung steigt.');
  }
 }
 function medTausch(){
@@ -9211,7 +9218,7 @@ function medKurs(){
  G.cash-=L[M.skill];M.skill++;xpAdd(10);fameAdd(2);sfx('win');
  toast(pick(['Lektion '+M.skill+': „Das Passwort ist nie 1234. Außer bei Herbert.“','Lektion '+M.skill+': Pixel-Paule zeigt dir, wie man mit drei Bildschirmen gleichzeitig wichtig aussieht.','Lektion '+M.skill+': „Ein guter Hacker trinkt Kaffee. Ein sehr guter Hacker trinkt zwei.“']));render2();
 }
-function kinoBuy(){if(G.cash<40000||G.med.kino)return;G.cash-=40000;G.med.kino=1;fameAdd(20);sfx('win');toast('Der Flimmerpalast gehört dir! Der Vorführer wacht auf, sieht dich und schläft beruhigt wieder ein.');render2();}
+function kinoBuy(){if(G.cash<3000||G.med.kino)return;G.cash-=3000;G.med.kino=1;rufAdd(10);sfx('win');karCheck();toast('Der Flimmerpalast gehört dir! Der Vorführer wacht auf, sieht dich und schläft beruhigt wieder ein.');render2();}
 function medFeld(z,H){
  for(let y=22;y<=27;y++)for(let x=33;x<=46;x++){const t=H.zg(x,y);if(t===TR)H.zs(x,y,GR);}
  const m=H.mk('autokino','sk',40,27,'Autokino Sternenhimmel','Autokino Sternenhimmel');m.sk='autokino';m.col='#c08aff';
@@ -9229,11 +9236,11 @@ const VSTAR=['Herbert Klappstuhl','Oma Truus','Major Malzbier','Baron Münchhaus
 const VSYN={'Herbert Klappstuhl':{Komödie:2,Grusel:1},'Oma Truus':{Action:2,Komödie:1},'Major Malzbier':{'Sci-Fi':2,Action:1},'Baron Münchhausen':{Action:1,'Sci-Fi':1,Komödie:1},'Desirée Glitzer':{Liebe:2,Grusel:1},'Du selbst':{}};
 const VTIT={Action:['Explosion im Imbiss','Die Rasenmäher-Jagd','Turbo-Tretboot','Mission Mayo 2'],Komödie:['Chaos im Vorzelt','Der Joghurt-Dieb','Pommes für alle','Zu früh, zu spät, zu lustig'],Liebe:['Verliebt im Freibad','Zwei Herzen, ein Wohnwagen','Kuss am Pfandautomaten'],'Sci-Fi':['Aliens lieben Pils','Planet Krümel','Raumkapsel Hopfen 2'],Grusel:['Das Quietschen im Keller','Der Zwerg im Schrank','Nacht im Fernsehturm'],Tierfilm:['Die Tauben von Rheinhanfen','Ente gut, alles gut','Der Dackel mit der Föhnfrisur']};
 const VKRIT=['„Ein Film. Er hat angefangen und aufgehört.“','„Solide. Die Gartenzwerge haben Talent.“','„Lustig, rührend, ein bisschen zu laut. Gefällt mir!“','„Großes Kino! Ich habe zweimal gelacht und einmal geweint.“','„Ein Meisterwerk! Die Tauben im Hintergrund verdienen einen Preis.“'];
-function vdStart(){UI.vd={};mdl('Studio 1: Video drehen','Regisseurin Lola Klappe klatscht in die Hände: „Wir drehen! Erst das Genre.“',VGEN.map(g=>[g,'yk:vd:g:'+g]));}
+function vdStart(loc){UI.vd={loc:loc||'holly'};mdl(loc==='sv'?'Studio Senderviertel: Show drehen':'Studio 1: Kinofilm oder Video drehen','Regisseurin Lola Klappe klatscht in die Hände: „Wir drehen! Erst das Genre.“',VGEN.map(g=>[g,'yk:vd:g:'+g]));}
 function vdStep(a,v){
  const d=UI.vd||(UI.vd={});
  if(a==='g'){d.g=v;mdl('Studio 1: Star wählen','„'+v+'? Hervorragend! Und wer spielt die Hauptrolle?“',VSTAR.filter(s=>s!=='Desirée Glitzer'||G.med.diva).map(s=>[s,'yk:vd:s:'+s]));return;}
- if(a==='s'){d.s=v;mdl('Studio 1: Budget','„Und wie viel Geld verbrennen wir?“',[['Kleines Budget: 200 €','yk:vd:b:0',G.cash<200],['Mittleres Budget: 1.000 €','yk:vd:b:1',G.cash<1000],['Blockbuster: 5.000 €','yk:vd:b:2',G.cash<5000]]);return;}
+ if(a==='s'){d.s=v;mdl('Studio 1: Budget','„Und wie viel Geld verbrennen wir?“',[['Kleines Budget: 200 €','yk:vd:b:0',G.cash<200],['Mittleres Budget: 1.000 €','yk:vd:b:1',G.cash<1000],[d.loc==='sv'?'Blockbuster: nur im Studio in Hollyhanf':'Blockbuster: 5.000 € (Kinofilm)','yk:vd:b:2',d.loc==='sv'||G.cash<5000]]);return;}
  if(a==='b'){
   const b=+v,cost=[200,1000,5000][b];if(G.cash<cost){toast('Nicht genug Geld.');return;}
   G.cash-=cost;sfx('coin');
@@ -9241,10 +9248,10 @@ function vdStep(a,v){
   const st=clamp(Math.round(1+rf(0,1.8)+syn*.8+b*.7+(G.med.dreh||0)*.4),1,5);
   const ti=pick(VTIT[d.g])+(chance(.3)?' '+rnd(2,4):'');
   startFade('Klappe, die erste! '+d.s+' gibt alles. Kamera läuft … und Action!',()=>{
-   G.med.vids.push({ti:ti,g:d.g,s:d.s,st:st,v:Math.round(st*st*150*(1+b)),day:G.day});
+   const kf=d.loc!=='sv'&&b===2&&st>=3?1:0;G.med.vids.push({ti:ti,g:d.g,s:d.s,st:st,v:Math.round(st*st*150*(1+b)),day:G.day,kf:kf});if(kf)G.med.kf=1;rufAdd(st,true);
    if(G.med.vids.length>12)G.med.vids.shift();
    fameAdd(st*3);xpAdd(6);mood(st*3,'+'+st*3+' Film');sfx(st>=4?'win':'clap');
-   showModal({title:'Premiere: „'+ti+'“',text:d.g+' mit '+d.s+'. '+'★'.repeat(st)+'☆'.repeat(5-st),lines:['Kritik: '+VKRIT[st-1],'Dein Video bringt jetzt jeden Tag Geld, je mehr Sterne, desto mehr Zuschauer.'],choices:[{label:'Weiter',a:'mclose'}]});
+   showModal({title:'Premiere: „'+ti+'“',text:d.g+' mit '+d.s+'. '+'★'.repeat(st)+'☆'.repeat(5-st),lines:['Kritik: '+VKRIT[st-1],(kf?'Das ist ein echter Kinofilm! Jetzt fehlt nur noch die Premiere: roter Teppich in Hollyhanf (ab Ruf 25) oder Untergrund-Premiere über den eigenen Fernsehturm.':b===2&&d.loc!=='sv'?'Für eine Kino-Premiere braucht der Film mindestens 3 Sterne. Tipp: Star und Genre müssen zusammenpassen.':'Deine Show bringt jeden Tag Geld und Ruf und macht dein Programm größer.')],choices:[{label:'Weiter',a:'mclose'}]});
   });
  }
 }
@@ -9301,6 +9308,7 @@ function medStatic(c,z){
 }
 function medZDraw(cx,cy){
  const z=ZONE;if(!z)return;
+ mktZDraw(z,cx,cy);
  if(z.name==='feldweg'&&Math.hypot(40*TS-P.x,24*TS-P.y)<700){const x0=35*TS+6,y0=22.6*TS+6,w=10*TS-12,h=2.2*TS-12,t=timeNow;ctx.fillStyle='#1a2a3a';ctx.fillRect(x0,y0,w,h);for(let i=0;i<5;i++){ctx.fillStyle=['#e5504d','#ffd23f','#5fd0ff','#7ad35a','#ff9ec7'][i];const px=x0+((t*40+i*70)%w),py=y0+h/2+Math.sin(t*2+i)*h*.3;ctx.beginPath();ctx.arc(px,py,8+i,0,6.283);ctx.fill();}ctx.fillStyle='rgba(255,255,255,.08)';ctx.fillRect(x0,y0,w,h);}
  if(z.name==='holly'&&G.med&&G.med.star){const x=(3+10*4.3)*TS,y=16.5*TS;if(x>cx-40&&x<cx+VW+40){ctx.fillStyle='#8a1f2a';ctx.fillRect(x-22,y-10,44,20);ctx.fillStyle='#ffd23f';ctx.font='bold 13px Arial';ctx.textAlign='center';ctx.fillText('★',x,y+1);ctx.font='bold 6px Arial';ctx.fillText('ENTERTAIN MASTER',x,y+8);ctx.textAlign='start';}}
  if(z.name==='holly'){skl().forEach(d=>{if(d.k==='stunt'){d.fallT=(d.fallT||rf(6,10))-fdt;if(d.fall>0)d.fall-=fdt;if(d.fallT<=0){d.fallT=rf(8,14);d.fall=1.6;if(Math.hypot(d.x-P.x,d.y-P.y)<400)addFx(d.x,d.y-24,pick(['Autsch!','Plumps!','Alles gestellt!']),'#ffd23f',1.2);}}});}
@@ -9318,7 +9326,7 @@ function medDraw(cx,cy){
  });
 }
 function medVanDraw(c){ctx.save();ctx.translate(c.x,c.y);ctx.rotate(c.a);ctx.fillStyle='#e8edf2';ctx.beginPath();ctx.ellipse(-2,0,8,6,0,0,6.283);ctx.fill();ctx.strokeStyle='#5a6270';ctx.beginPath();ctx.moveTo(-2,0);ctx.lineTo(6,-4);ctx.stroke();ctx.fillStyle=Math.floor(timeNow*4)%2?'#ff3030':'#ffd23f';ctx.beginPath();ctx.arc(8,-6,2,0,6.283);ctx.fill();ctx.restore();}
-function medHud(){if(!G||!G.med)return '';const n=G.med.subs.length,b=n-medSubsOk();return '<div class="chip t"><small>KUNDEN'+(b?' · <span class="rd">'+b+' STÖRUNG</span>':'')+'</small><b>'+n+'</b><span class="sub">Tragen '+used()+' / '+cap()+'</span></div>';}
+function medHud(){if(!G||!G.med)return '';const M=G.med,n=M.subs.length,b=n-medSubsOk(),v=M.ver||0;return '<div class="chip t"><small>RUF · VERDACHT</small><b><span class="gr">'+Math.round(M.ruf||0)+'</span> · <span class="'+(v>=70?'rd blink':'rd')+'">'+v+' %</span></b><div class="hb" style="height:.28rem;margin:.1rem 0"><i style="width:'+v+'%;background:#ff6a5a"></i></div><span class="sub">'+n+' Kunden'+(b?' · <span class="rd">'+b+' Störung</span>':'')+'</span></div>';}
 function medLoot(d){
  const M=G.med;if(!d.left){toast('Hier ist nichts mehr.');return;}
  if((M.loot||0)>=3){toast('Mehr passt nicht unauffällig in deine Jacke. Raus hier!');return;}
@@ -9326,13 +9334,13 @@ function medLoot(d){
  const g=pick([['rec',2],['box',1],['ant',2],['kab',3],['tv',1],['box',2]]);
  M.hw[g[0]]=Math.min(30,M.hw[g[0]]+g[1]);M.lootHw[g[0]]=(M.lootHw[g[0]]||0)+g[1];
  let x='';if(chance(.35)){const c=mkCode('mst');M.codes.push(c);M.lootC.push(c.id);x=' Und ein Zettel mit einem Master-Code: '+c.n+'!';}
- heat(4);sfx('pick');addFx(d.x,d.y-16,'+'+g[1]+' '+MHW[g[0]].n,'#9ff5c0',1.4);
+ heat(4);verAdd(3,true);sfx('pick');addFx(d.x,d.y-16,'+'+g[1]+' '+MHW[g[0]].n,'#9ff5c0',1.4);
  toast('Du steckst '+g[1]+' '+MHW[g[0]].n+' ein.'+x+' Jetzt leise zurück zum Tunnel!');
 }
 function medLootTake(){const M=G.med;Object.keys(M.lootHw||{}).forEach(k=>{M.hw[k]=Math.max(0,M.hw[k]-M.lootHw[k]);});M.codes=M.codes.filter(c=>(M.lootC||[]).indexOf(c.id)<0);M.loot=0;M.lootHw={};M.lootC=[];}
 function medTowerBuy(){
- const M=G.med;if(medRankI()<4||G.cash<80000||M.tower===2)return;
- G.cash-=80000;M.tower=2;G.shift=null;M.codes.push(mkCode('turm'));fameAdd(50);sfx('win');
+ const M=G.med;if(medRankI()<1||(M.skill||0)<2||G.cash<4000||M.tower===2)return;
+ G.cash-=4000;M.tower=2;G.shift=null;M.codes.push(mkCode('turm'));verAdd(10,true);sfx('win');karCheck();
  toast('Der Fernsehturm gehört dir! Die GlotzKonzern AG zieht beleidigt nach Wuppertal. Ab jetzt: Turm-Code für 60 Kunden, der nie gesperrt wird, und jeden Morgen frische Technik im Lager.');
 }
 function skAct21(p){
@@ -9361,10 +9369,10 @@ function skAct21(p){
  if(q==='ho2:train'){mood(5,'+5');toast('Stefan zeigt dir, wie man elegant über einen Gartenstuhl fällt. Du fällst nicht elegant, aber laut.');return true;}
  if(q==='ho2:stunt'){if(G.cash<600||M.stunt)return true;G.cash-=600;M.stunt=1;sfx('win');toast('Stefan Sturz ist gebucht: Deine Action-Videos bekommen mehr Sterne.');return true;}
  if(q==='hl:cast'){startFade('Du spielst „Passant Nr. 4“ und läufst dreimal durchs Bild. Beim vierten Mal winkst du in die Kamera.',()=>{G.cash+=80;G.stats.earned+=80;fameAdd(1);mood(4,'+4');toast('Statisten-Gage: 80 €. Lola sagt: „Das Winken schneiden wir raus. Oder auch nicht.“');});return true;}
- if(q==='hl:lic:f'||q==='hl:lic:s'||q==='hl:lic:l'){const k=q.slice(7),P2={f:6000,s:4000,l:9000};if(M.lic[k]||G.cash<P2[k])return true;G.cash-=P2[k];M.lic[k]=1;fameAdd(10);sfx('win');toast('Lizenz gekauft! Ab jetzt kannst du Kunden legal anschließen, und Kino und Autokino bringen mehr Geld. Herr Glanz stempelt dreimal, Frau Gloria applaudiert.');return true;}
+ if(q==='hl:lic:f'||q==='hl:lic:s'||q==='hl:lic:l'){const k=q.slice(7),P2={f:1500,s:1200,l:2500};if(M.lic[k]||G.cash<P2[k])return true;G.cash-=P2[k];M.lic[k]=1;rufAdd(4);sfx('win');toast('Lizenz gekauft! Dein Programm wächst, Kino und Autokino bringen mehr Geld'+(k==='l'?', und Live-Märkte kannst du jetzt legal versorgen':'')+'. Herr Glanz stempelt dreimal, Frau Gloria applaudiert.');karCheck();return true;}
  if(q==='hl:prem'){if(!M.vids.length)return true;const v=M.vids[M.vids.length-1];mood(10,'+10 Premiere');fameAdd(3);sfx('clap');toast('Roter Teppich für „'+v.ti+'“! Blitzlichter, Jubel, und '+v.s+' gibt Autogramme. Ein Kritiker flüstert: „'+'★'.repeat(v.st)+'“.');return true;}
  if(q==='hl:autoW'){if(G.cash<6)return true;G.cash-=6;const f=pick(M.neu);medWatch(f,'HD','auto');return true;}
- if(q==='hl:autoB'){if(G.cash<25000||M.auto)return true;G.cash-=25000;M.auto=1;fameAdd(15);sfx('win');toast('Das Autokino gehört dir! Auf der Leinwand steht jetzt dein Name. Ganz klein, unten rechts.');return true;}
+ if(q==='hl:autoB'){if(G.cash<2500||M.auto)return true;G.cash-=2500;M.auto=1;rufAdd(5);sfx('win');toast('Das Autokino gehört dir! Auf der Leinwand steht jetzt dein Name. Ganz klein, unten rechts.');return true;}
  return true;
 }
 Object.assign(KSKM,{
@@ -9372,11 +9380,11 @@ Object.assign(KSKM,{
  netz:()=>{UI.medFrom=null;show('netz');},
  elektro:()=>show('medshop'),
  kino:()=>show('kino'),
- autokino:()=>mdl('Autokino Sternenhimmel','Grillen zirpen, die Leinwand flackert, und wer kein Auto hat, bekommt einen Klappstuhl. Heute: „'+FILMS[G.med.neu[0]].ti+'“.'+(G.med.auto?' Das Autokino gehört dir.':''),[['Film schauen: 6 €','yk:hl:autoW',G.cash<6],[G.med.auto?'Gehört dir schon':'Autokino kaufen: 25.000 €','yk:hl:autoB',!!G.med.auto||G.cash<25000]]),
- studio:()=>vdStart(),
+ autokino:()=>mdl('Autokino Sternenhimmel','Grillen zirpen, die Leinwand flackert, und wer kein Auto hat, bekommt einen Klappstuhl. Heute: „'+FILMS[G.med.neu[0]].ti+'“.'+(G.med.auto?' Das Autokino gehört dir.':''),[['Film schauen: 6 €','yk:hl:autoW',G.cash<6],[G.med.auto?'Gehört dir schon':'Autokino kaufen: 2.500 € (40 Zuschauer)','yk:hl:autoB',!!G.med.auto||G.cash<2500]]),
+ studio:()=>vdStart('holly'),
  casting:()=>mdl('Studio 2: Casting','Eine Schlange aus Statisten wartet. Alle tragen Hüte, keiner weiß warum.',[['Als Statist arbeiten: 80 €','yk:hl:cast']]),
- rechte:()=>{const L=G.med.lic;mdl('Rechteagentur Glanz & Gloria','Herr Glanz und Frau Gloria sitzen hinter einem goldenen Schreibtisch: „Lizenzen, Darling! Damit ist alles legal und du schläfst nachts ruhig.“',[[L.f?'Filmlizenz: gekauft':'Filmlizenz: 6.000 €','yk:hl:lic:f',!!L.f||G.cash<6000],[L.s?'Serienlizenz: gekauft':'Serienlizenz: 4.000 €','yk:hl:lic:s',!!L.s||G.cash<4000],[L.l?'Live-TV und Sport: gekauft':'Live-TV und Sport: 9.000 €','yk:hl:lic:l',!!L.l||G.cash<9000]]);},
- premiere:()=>mdl('Premierenkino','Roter Teppich, Absperrkordeln, Fotografen.'+(G.med.vids.length?' Dein neuester Film: „'+G.med.vids[G.med.vids.length-1].ti+'“.':' Du hast noch keinen eigenen Film. Ab ins Studio 1!'),[['Premiere feiern','yk:hl:prem',!G.med.vids.length]])
+ rechte:()=>{const L=G.med.lic;mdl('Rechteagentur Glanz & Gloria','Herr Glanz und Frau Gloria sitzen hinter einem goldenen Schreibtisch: „Lizenzen, Darling! Ganz legal, mehr Programm, und du schläfst nachts ruhig. Live-TV brauchst du für Fußball und Karneval.“',[[L.f?'Filmlizenz: gekauft':'Filmlizenz: 1.500 € (+6 Programm)','yk:hl:lic:f',!!L.f||G.cash<1500],[L.s?'Serienlizenz: gekauft':'Serienlizenz: 1.200 € (+4 Programm)','yk:hl:lic:s',!!L.s||G.cash<1200],[L.l?'Live-TV und Sport: gekauft':'Live-TV und Sport: 2.500 €','yk:hl:lic:l',!!L.l||G.cash<2500]]);},
+ premiere:()=>{const M=G.med,kf=M.vids.filter(x=>x.kf).pop();mdl('Premierenkino','Roter Teppich, Absperrkordeln, Fotografen.'+(M.prem?' Deine große Premiere war ein voller Erfolg!':kf?' Dein Kinofilm: „'+kf.ti+'“.':M.kf?' Dein Kinofilm ist bereit.':' Für eine große Premiere brauchst du einen Kinofilm: Studio 1, Blockbuster-Budget, mindestens 3 Sterne.'),[['Große Kino-Premiere (ab Ruf 25, du hast '+Math.round(M.ruf||0)+')','yk:mq:prem2',!M.kf||!!M.prem||(M.ruf||0)<25],['Kleine Premiere für dein neuestes Video','yk:hl:prem',!M.vids.length]]);}
 });
 function medRegister(){
 Object.assign(SCREENS,MEDSCR);
@@ -9384,9 +9392,9 @@ Object.assign(ACT,{
  medS(){medOpen('med');},medPC(){medOpen('medpc');},medGo(s){show(s);},
  medFilms(from){UI.filmFrom=from;show('medfilms');},
  medAcc(id){res(medAccept(+id));},medAb(id){res(medAbandon(+id));},
- medMark(h){G.med.mark=h;medSync();const x=mHouse(h);toast((x?x.n:'Kunde')+' ist auf der Karte gelb markiert.');},
+ medMark(h){G.med.mark=h;medSync();medNavSet(h);},medJob(id){medJobMenu(id);},medNavNext(){medNavNext();},
  medWatchI(i){const x=G.med.films[+i];if(!x)return;UI.screen=null;render2();medWatch(x.f,x.q,'home');},
- medScr(){if(G.med.scr>0)return;G.med.scr=90;sfx('ok');toast('Der Scraper rattert los. Er durchsucht das ausgedachte Internet nach Filmen und Serien.');render2();},
+ medScr(){if(G.med.scr>0)return;G.med.scr=90;verAdd(1,true);sfx('ok');toast('Der Scraper rattert los. Er durchsucht das ausgedachte Internet nach Filmen und Serien.');render2();},
  hackGo(){if(G.med.skill<1||G.med.hackT>0)return;medHackStart();},hackHit(){medHackHit();},
  medBuy(k){medBuyHw(k);},medCode(t){medBuyCode(t);},medKurs(){medKurs();},
  medRent(){if(G.cash<5)return;G.cash-=5;sfx('coin');UI.medFrom='netz';show('medpc');},
@@ -9435,6 +9443,371 @@ function mmFade(cx,cy){
  if(h!==CPAD.h){CPAD.h=h;mm.classList.toggle('fade',h);}
 }
 
+
+const MARR=['→','↘','↓','↙','←','↖','↑','↗'];
+const MCOL={neu:'#5fd0ff',film:'#ff8ad8',legal:'#7ad35a',weg:'#ff5f5f',mark:'#ffd23f',frei:'#c8d0d8'};
+function medTargets(){
+ const L=[];if(!G||!G.med)return L;const M=G.med,seen={};
+ M.act.forEach(j=>{const h=mHouse(j.h);if(h&&!seen[h.id]){seen[h.id]=1;L.push({h:h,id:h.id,w:'city',t:j.t==='film'?'Film „'+FILMS[j.f].ti+'“ bringen':j.t==='legal'?'legal anschließen':'Fernsehen einrichten',col:MCOL[j.t]||MCOL.neu});}});
+ M.subs.forEach(s=>{if(s.ok||seen[s.h])return;const h=mPlace(s.h);if(h){seen[h.id]=1;L.push({h:h,id:h.id,w:h.z||'city',t:'Bild weg! Reparieren',col:MCOL.weg});}});
+ if(M.mark&&!seen[M.mark]){const h=mPlace(M.mark);if(h){seen[h.id]=1;L.push({h:h,id:h.id,w:h.z||'city',t:'Kunde besuchen',col:MCOL.mark});}}
+ const cw=ZONE?ZONE.name:'city';
+ if(ZONE&&MKT[cw]&&(M.st>=3||Object.keys(MKT).some(z=>mktCount(z)>0))){const S=mktSpots(cw);if(S)S.forEach((p,i)=>{const id='z:'+cw+':'+i;if(seen[id]||M.subs.some(s=>s.h===id))return;const h=mPlace(id);if(h)L.push({h:h,id:id,w:cw,t:'frei: anschließen',col:MCOL.frei});});}
+ return L;
+}
+function mD(h){return Math.hypot(h.x-P.x,h.y+2-P.y);}
+function mDist(h){return Math.round(mD(h)/80)*10;}
+function mDir(h){const a=Math.atan2(h.y+2-P.y,h.x-P.x);return MARR[((Math.round(a/(Math.PI/4))%8)+8)%8];}
+function mWhere(h){const w=h.z||'city',cw=ZONE?ZONE.name:'city';if(w!==cw)return 'in '+(w==='city'?'Rheinhanfen':MKT[w].ort);const d=mDist(h);return d<20?'du bist da':d+' m '+mDir(h);}
+function medNavT(L){
+ if(!G||!G.med)return null;const A=L||medTargets(),cw=ZONE?ZONE.name:'city';L=A.filter(o=>o.w===cw);if(!L.length)return null;
+ if(G.med.nav){const f=L.find(o=>o.id===G.med.nav);if(f)return f;if(!A.some(o=>o.id===G.med.nav))G.med.nav=null;}
+ let b=null,bd=1e9;L.forEach(o=>{const d=mD(o.h);if(d<bd){bd=d;b=o;}});return b;
+}
+function medTrk(){
+ if(!G||!G.med)return '';const A=medTargets();if(!A.length)return '';
+ const cw=ZONE?ZONE.name:'city',L=A.filter(o=>o.w===cw),R=A.filter(o=>o.w!==cw&&o.col===MCOL.weg);
+ const n=medNavT(A);L.sort((a,b)=>a===n?-1:b===n?1:mD(a.h)-mD(b.h));
+ let t='';
+ L.slice(0,3).forEach((o,i)=>{t+='<div class="tv'+(o.col===MCOL.weg?' k':'')+'"><b>'+(i===0?'NAVI → ':'')+o.h.n+'</b> · '+o.t+' · '+mWhere(o.h)+'</div>';});
+ if(L.length>3)t+='<div class="tv">+ '+(L.length-3)+' weitere Ziele mit weißem Ring auf der Karte</div>';
+ const rw={};R.forEach(o=>{rw[o.w]=(rw[o.w]||0)+1;});
+ Object.keys(rw).slice(0,2).forEach(w=>{t+='<div class="tv k"><b>Störung '+(w==='city'?'in Rheinhanfen':'in '+MKT[w].ort)+'</b> · '+rw[w]+'× Bild weg</div>';});
+ if(!L.length&&cw!=='city'){const c=A.filter(o=>o.w==='city').length;if(c)t+='<div class="tv"><b>'+c+' Ziele in Rheinhanfen</b> · Medien-Aufträge</div>';}
+ return t;
+}
+function medNavWorld(gx,gy,cx,cy){
+ if(!G||!G.med)return;
+ const L=medTargets().filter(o=>o.w===(ZONE?ZONE.name:'city'));if(!L.length)return;
+ const n=medNavT(L),pl=1+Math.sin(timeNow*5)*.15,iv=(x,y)=>x>cx-60&&x<cx+VW+60&&y>cy-60&&y<cy+VH+60;
+ L.forEach(o=>{const x=o.h.x,y=o.h.y+2;if(!iv(x,y))return;ctx.strokeStyle=o===n?'#fff':o.col;ctx.lineWidth=o===n?4:3;ctx.beginPath();ctx.arc(x,y,24*pl,0,6.283);ctx.stroke();});
+ if(n){
+  const x=n.h.x,y=n.h.y+2;
+  if(iv(x,y)){const b=Math.abs(Math.sin(timeNow*4))*8;ctx.fillStyle=n.col;ctx.strokeStyle='#000';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x,y-27-b);ctx.lineTo(x-10,y-42-b);ctx.lineTo(x+10,y-42-b);ctx.closePath();ctx.fill();ctx.stroke();}
+  const d=Math.hypot(x-gx,y-gy);
+  if(d>90){const a=Math.atan2(y-gy,x-gx);ctx.save();ctx.translate(gx+Math.cos(a)*64,gy+Math.sin(a)*64);ctx.rotate(a);ctx.fillStyle=n.col;ctx.strokeStyle='#000';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(12,0);ctx.lineTo(-7,-9);ctx.lineTo(-3,0);ctx.lineTo(-7,9);ctx.closePath();ctx.fill();ctx.stroke();ctx.restore();}
+ }
+ ctx.lineWidth=1;
+}
+function medNavEdge(cx,cy){
+ if(!G||!G.med||UI.title)return;
+ const n=medNavT();if(!n)return;
+ const x=n.h.x-cx,y=n.h.y+2-cy,L=16,R=VW-16,T=CPAD.t+16,B=VH-CPAD.b-16;
+ if(x>L&&x<R&&y>T&&y<B)return;
+ const ox=VW/2,oy=(T+B)/2,dx=x-ox,dy=y-oy;
+ let k=1e9;if(dx>0)k=Math.min(k,(R-ox)/dx);if(dx<0)k=Math.min(k,(L-ox)/dx);if(dy>0)k=Math.min(k,(B-oy)/dy);if(dy<0)k=Math.min(k,(T-oy)/dy);
+ const ex=ox+dx*k,ey=oy+dy*k,a=Math.atan2(dy,dx),pl=1+Math.sin(timeNow*6)*.12;
+ ctx.save();ctx.translate(ex,ey);ctx.rotate(a);ctx.scale(pl,pl);ctx.fillStyle=n.col;ctx.strokeStyle='#000';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(11,0);ctx.lineTo(-10,-11);ctx.lineTo(-5,0);ctx.lineTo(-10,11);ctx.closePath();ctx.fill();ctx.stroke();ctx.restore();
+ const s=n.h.n+' · '+mDist(n.h)+' m';ctx.font='bold 12px Arial';const w=ctx.measureText(s).width+14;
+ const lx=clamp(ex-Math.cos(a)*(w/2+20),w/2+4,VW-w/2-4),ly=clamp(ey-Math.sin(a)*26,T,B);
+ ctx.fillStyle='rgba(12,16,13,.85)';ctx.fillRect(lx-w/2,ly-10,w,20);ctx.strokeStyle=n.col;ctx.lineWidth=1.5;ctx.strokeRect(lx-w/2,ly-10,w,20);
+ ctx.fillStyle='#fff';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(s,lx,ly+1);ctx.lineWidth=1;
+}
+function medMini(x,O,S,big,r){
+ if(!G||!G.med)return;
+ if(!ZONE){x.fillStyle=MCOL.neu;G.med.subs.forEach(s=>{if(!s.ok||mIsAbroad(s.h))return;const h=mHouse(s.h);if(h){x.beginPath();x.arc(O+h.x/TS*S,h.y/TS*S,big?2.4:1.8,0,6.283);x.fill();}});}
+ else if(MKT[ZONE.name])ZONE.MKS.forEach(m=>{if(m.sk!=='mspot')return;x.fillStyle=m.col;x.beginPath();x.arc(O+m.x/TS*S,m.y/TS*S,big?3:2.4,0,6.283);x.fill();});
+ const L=medTargets().filter(o=>o.w===(ZONE?ZONE.name:'city')),n=medNavT(L),bl=Math.floor(timeNow*3)%2;
+ L.forEach(o=>{const X=O+o.h.x/TS*S,Y=o.h.y/TS*S;x.fillStyle=o.col;x.beginPath();x.arc(X,Y,r+1,0,6.283);x.fill();x.strokeStyle='#fff';x.lineWidth=big?2:1.5;x.beginPath();x.arc(X,Y,(big?8:6.5)+(o===n&&bl?2.5:0),0,6.283);x.stroke();});
+ x.lineWidth=1;
+}
+function medMapNav(){const n=medNavT();return n?'<br><b style="color:'+n.col+'">Navi: '+n.h.n+' · '+n.t+' · '+mWhere(n.h)+'</b>':'';}
+function medNavSet(hid,quiet){
+ G.med.nav=hid;const h=mPlace(hid);
+ if(!quiet){closeAll();toast('Navi läuft: Folge dem Pfeil zu '+(h?h.n:'deinem Ziel')+' ('+(h?mWhere(h):'')+').');}
+}
+function medNavNext(){
+ const L=medTargets().filter(o=>o.w===(ZONE?ZONE.name:'city'));if(!L.length)return;
+ L.sort((a,b)=>mD(a.h)-mD(b.h));
+ const n=medNavT(L),i=L.indexOf(n),o=L[(i+1)%L.length];G.med.nav=o.id;sfx('tick');render2();
+}
+function medJobMenu(id){
+ const j=G.med.act.find(o=>o.id===+id);if(!j)return;const h=mHouse(j.h);
+ mdl(h?h.n:'Auftrag',medOfferTxt(j)+' Entfernung: '+(h?mWhere(h):'?')+'.',[['Navi starten: Pfeil zeigt den Weg','yk:mn:nav:'+j.h],['Auftrag absagen (-1 Beliebtheit)','yk:mn:ab:'+j.id]]);
+}
+function skAct22(p){
+ if(p.indexOf('yk:mn:')!==0)return false;
+ const q=p.slice(6).split(':');UI.modal=null;
+ if(q[0]==='nav'){medNavSet(q[1]);return true;}
+ if(q[0]==='ab'){res(medAbandon(+q[1]));return true;}
+ render2();return true;
+}
+
+
+const MSTUFE=[
+ {n:'Pizzabote mit Traum'},
+ {n:'Kabelsalat-Azubi',up:'Die ersten drei Haushalte schauen dank dir fern! Dein Geld kommt ab jetzt vom Fernsehen. Die Lieferjobs laufen nur noch kurz weiter.'},
+ {n:'Kiez-Sender',up:'Ein eigenes Kino oder ein ganzer Fernsehturm: Jetzt weiß jeder in Rheinhanfen, wer hier sendet. Deine alte Pizza-Tour übernimmt ab jetzt Kalle.'},
+ {n:'Stadt-Star',up:'Ganz Rheinhanfen schaut dein Programm. Zeit für Europa! Auf der Europa-Karte warten Leute, die fernsehen wollen: Camping, Mallorca, Köln, die Alpen und mehr.'},
+ {n:'Euro-Sender',up:'Drei Länder schauen dein Programm! Jetzt fehlt nur noch das große Finale: dein eigener Kinofilm mit Premiere.'},
+ {n:'Entertain Master'}
+];
+const KTIP=[null,
+ {g:'Sendelizenz im Amt für Alles (400 €), dazu Receiver und Kabel bei Elektro-Ramsch.',s:'M3U-Code im Netzcafé (50 €), dazu Receiver und Antenne bei Elektro-Ramsch.',x:'Startgeld: Lieferjobs im Menü unter „Handy: Nebenjobs“. Danach Medien-Aufträge annehmen, das Navi führt dich hin.'},
+ {g:'Kino Flimmerpalast kaufen (3.000 €). Bringt jeden Tag Geld und Ruf.',s:'Technik Stufe 2 im Netzcafé lernen und den Fernsehturm übernehmen (4.000 €).',x:'Mehr Haushalte: Medien-Zentrale, Medien-Aufträge.'},
+ {g:'Film-, Serien- und Live-Lizenzen in Hollyhanf, eigene Shows im Studio Senderviertel.',s:'Scraper am Hacker-PC und Tauschbörse im Netzcafé.',x:'Programm zählt alle Filme, Serien, Lizenzen und eigenen Shows.'},
+ {g:'Ruf 15 sammeln, dann Euro-Sendelizenz im Amt für Alles. Live-Märkte brauchen die Live-Lizenz.',s:'Xtream-Codes mit Live-TV im Netzcafé. Technik Stufe 1 brauchst du für beide Wege.',x:'Reise über die Europa-Karte. In jedem Markt wartet ein Ansprechpartner, das Navi zeigt die Anschlüsse.'},
+ {g:'Kinofilm im Studio Hollyhanf drehen (Blockbuster, mindestens 3 Sterne), mit Ruf 25 Premiere auf dem roten Teppich.',s:'Kinofilm im Studio Hollyhanf drehen und vom eigenen Fernsehturm aus senden: Untergrund-Premiere.',x:'Zuschauer: mehr Haushalte, mehr Märkte, Kino, Autokino und Fernsehturm.'}
+];
+const MKT={
+ camping:{ort:'Camping NL',chef:'Platzwart Henk',sp:'Wohnwagen',v:4,fee:55,live:0,txt:'„Abends sitzen alle vor dem Vorzelt und langweilen sich. Filme! Wir brauchen Filme!“'},
+ amsterdam:{ort:'Amsterdam',chef:'Kapitänin Fenna',sp:'Hausboot',v:3,fee:50,live:0,txt:'„Auf den Hausbooten wackelt das Bild immer. Gucken wollen trotzdem alle.“'},
+ malle:{ort:'Mallorca',chef:'Barchef Toni',sp:'Bar',v:25,fee:115,live:1,txt:'„Ohne Fußball live bleiben die Bars leer. Mit Fußball singen alle. Falsch, aber laut.“'},
+ bayern:{ort:'Bayern',chef:'Wirt Sepp',sp:'Biergarten',v:15,fee:85,live:1,txt:'„Im Biergarten will jeder das Spiel sehen. Und danach die Blasmusik-Show.“'},
+ oesterreich:{ort:'Österreich',chef:'Hüttenwirtin Resi',sp:'Skihütte',v:10,fee:70,live:0,txt:'„Wenn es schneit, schauen alle Serien. Es schneit hier immer.“'},
+ koeln:{ort:'Köln',chef:'Sitzungspräsident Jupp',sp:'Festzelt',v:30,fee:130,live:1,txt:'„Karneval live in jedes Zelt! Und zwar in Farbe!“'},
+ portugal:{ort:'Portugal',chef:'Surferin Inês',sp:'Strandbar',v:12,fee:75,live:0,txt:'„Nach dem Surfen wollen alle Filme schauen. Mit nassen Haaren.“'},
+ wuppertal:{ort:'Wuppertal',chef:'Schaffner Kurt',sp:'Schwebebahn-Waggon',v:20,fee:100,live:0,txt:'„Bildschirme in der Schwebebahn! Dann schauen die Leute nicht mehr nach unten.“'},
+ gallien:{ort:'Gallierdorf',chef:'Dorfältester Grollbart',sp:'Rundhütte',v:5,fee:55,live:0,txt:'„Wir haben noch nie ferngesehen. Ist das ein Zaubertrank für die Augen?“'},
+ fpark:{ort:'Freizeitpark',chef:'Parkchef Rudi Rummel',sp:'Warteschlange',v:35,fee:145,live:0,txt:'„In der Warteschlange langweilen sich die Leute. Ein Bildschirm, und alle sind glücklich!“'},
+ helden:{ort:'Heldenplatz',chef:'Captain Bademantel',sp:'Helden-WG',v:6,fee:58,live:0,txt:'„Auch Helden brauchen Feierabend. Am liebsten mit Heldenfilmen.“'}
+};
+const KARQ=[];let KT=0;
+function karInit(M){
+ if(M.st===undefined){M.st=0;M.ruf=0;M.ver=0;M.slic={};M.mk={};if(M.subs.some(s=>s.legal)||M.lic.f||M.lic.s||M.lic.l)M.slic.rh=1;}
+ if(!M.slic)M.slic={};if(!M.mk)M.mk={};
+}
+function rufAdd(v,q){const M=G.med;M.ruf=Math.max(0,Math.round(((M.ruf||0)+v)*10)/10);if(!q&&v>0)addFx(P.x,P.y-34,'+'+v+' Ruf','#7ad35a',1.2);UI.hudS=null;}
+function verAdd(v,q){const M=G.med;M.ver=clamp(Math.round((M.ver||0)+v),0,100);if(!q&&v>0)addFx(P.x,P.y-44,'+'+v+' % Verdacht','#ff7a6a',1.2);UI.hudS=null;}
+function mIsAbroad(id){return typeof id==='string'&&id.indexOf('z:')===0;}
+function mktSpots(z){const s=G&&G.med&&G.med.mk&&G.med.mk[z];return s&&s.sp?s.sp:null;}
+function mPlace(id){
+ if(!mIsAbroad(id))return mHouse(id);
+ const a=id.split(':'),z=a[1],i=+a[2],D=MKT[z];if(!D)return null;const S=mktSpots(z),p=S&&S[i];
+ return{id:id,z:z,i:i,n:D.sp+' '+(i+1)+' ('+D.ort+')',x:p?p.x*TS+16:0,y:p?p.y*TS+14:0,v:D.v};
+}
+function prog(){if(!G||!G.med)return 0;const M=G.med;return M.films.length+(M.lic.f?6:0)+(M.lic.s?4:0)+(M.lic.l?2:0)+M.vids.length;}
+function zus(){if(!G||!G.med)return 0;const M=G.med;let v=0;M.subs.forEach(s=>{if(!s.ok)return;const p=mPlace(s.h);v+=p&&p.v?p.v:0;});if(M.kino)v+=60;if(M.auto)v+=40;if(M.tower===2)v+=100;return v;}
+function mktCount(z){return G.med.subs.filter(s=>mIsAbroad(s.h)&&s.h.split(':')[1]===z).length;}
+function mktDoneN(){return Object.keys(MKT).filter(z=>mktCount(z)>=3).length;}
+function hhN(){return G.med.subs.filter(s=>!mIsAbroad(s.h)).length;}
+function karChecks(t){
+ const M=G.med,hw=M.hw,hh=hhN();
+ if(t===1){if(!M.kit&&(M.subs.length||((hw.rec+hw.box>=1)&&(hw.ant+hw.kab>=1)&&(M.codes.length>0||!!M.slic.rh))))M.kit=1;
+  return[{l:'Starter-Set: Receiver, Antenne oder Kabel, dazu ein Code oder die Sendelizenz',s:'Starter-Set',ok:!!M.kit},{l:'3 Haushalte angeschlossen',s:'Haushalte',ok:hh>=3,a:hh,b:3}];}
+ if(t===2)return[{l:'10 Haushalte angeschlossen',s:'Haushalte',ok:hh>=10,a:hh,b:10},{l:'Kino Flimmerpalast oder Fernsehturm gehört dir',s:'Kino oder Turm',ok:!!M.kino||M.tower===2}];
+ if(t===3)return[{l:'15 Haushalte: ganz Rheinhanfen',s:'Haushalte',ok:hh>=15,a:hh,b:15},{l:'Programm mit 8 Filmen, Serien oder Shows',s:'Programm',ok:prog()>=8,a:prog(),b:8}];
+ if(t===4){const n=mktDoneN();return[{l:'3 Märkte im Ausland erschlossen (je 3 Anschlüsse)',s:'Märkte',ok:n>=3,a:n,b:3}];}
+ if(t===5){const z=zus();return[{l:'Kinofilm gedreht (Hollyhanf, Blockbuster, mindestens 3 Sterne)',s:'Kinofilm',ok:!!M.kf},{l:'Premiere gefeiert: roter Teppich oder Fernsehturm',s:'Premiere',ok:!!M.prem},{l:'500 Zuschauer',s:'Zuschauer',ok:z>=500,a:z,b:500}];}
+ return[];
+}
+function karPct(){if(!G||!G.med)return 0;const M=G.med;if(M.st>=5)return 100;const c=karChecks(M.st+1);let s=0;c.forEach(x=>{s+=x.ok?1:x.b?Math.min(1,x.a/x.b):0;});return Math.round(s/c.length*100);}
+function karTrk(){
+ if(!G||!G.med||G.med.st===undefined)return '';const M=G.med;
+ if(M.st>=5)return '<div class="ziel"><b>ENTERTAIN MASTER</b> · '+zus()+' Zuschauer · weiter so!</div>';
+ const c=karChecks(M.st+1);
+ return '<div class="ziel"><b>ZIEL → '+MSTUFE[M.st+1].n+'</b> · '+c.map(x=>(x.ok?'✓ ':'')+(x.b?Math.min(x.a,x.b)+'/'+x.b+' ':'')+x.s).join(' · ')+'</div>';
+}
+function karQ(o){KARQ.push(o);}
+function karCheck(){
+ if(!G||!G.med||G.med.st===undefined)return;const M=G.med;
+ let n=0;while(M.st<5&&n++<6){const c=karChecks(M.st+1);if(!c.every(x=>x.ok))break;M.st++;karUp();}
+}
+function karUp(){
+ const M=G.med,t=MSTUFE[M.st];sfx('win');UI.hudS=null;
+ if(M.st>=5){M.star=1;const w=(M.ruf||0)>=30&&M.prem===1?'Dein Weg: Glanz und Glamour.':M.prem===2?'Dein Weg: aus dem Schatten an die Spitze.':'Dein Weg: ein bisschen Glanz, ein bisschen Schatten.';
+  karQ({title:'ENTERTAIN MASTER!',text:'Vom Pizzaboten zum größten Unterhaltungs-Imperium Europas! '+zus()+' Menschen schauen dein Programm. In Hollyhanf leuchtet dein Stern auf dem Walk of Fame. '+w,lines:['Das Spiel geht weiter: Erschließ alle Märkte, dreh noch mehr Filme und bleib der Chef.'],choices:[{label:'Hurra!',a:'mclose'}]});return;}
+ const nx=karChecks(M.st+1);
+ karQ({title:'Neuer Titel: '+t.n+'!',text:t.up,lines:['Nächstes Ziel: '+MSTUFE[M.st+1].n].concat(nx.map(x=>'• '+x.l)).concat(['Tipps: Menü → Karriere']),choices:[{label:'Weiter',a:'mclose'}]});
+}
+function karTick(dt){
+ if(!G||!G.med)return;const M=G.med;karInit(M);
+ KT-=dt;if(KT<=0){KT=1;karCheck();}
+ if(M.ver>=100&&!M.razQ){M.razQ=1;medRazzia();}
+ if(KARQ.length&&!UI.modal&&!UI.screen&&!fade&&!P.coast&&!UI.title)showModal(KARQ.shift());
+ if(!ZONE){const want=1+Math.floor((M.ver||0)/35),have=traffic.filter(c=>c.spuer).length;if(have<want){const c=traffic.find(c=>!c.cop&&!c.spuer);if(c){c.spuer=true;c.col='#6c7a89';}}}
+}
+function karDay(L){
+ const M=G.med;let ill=0;
+ M.subs.forEach(s=>{if(s.legal)return;ill+=mIsAbroad(s.h)?.5:(s.typ==='ant'&&!s.tarn?2:.7);});
+ if(M.kino&&M.kinoSchwarz)ill+=4;
+ const v0=M.ver||0;M.ver=clamp(Math.round(v0+ill-10),0,100);
+ if(M.kino&&!M.kinoSchwarz)rufAdd(1,true);if(M.auto)rufAdd(1,true);
+ if(M.ver>=70)L.push('Verdacht '+M.ver+' %: Die Spürwagen kreisen! Tarnen, legal umstellen oder eine Weile ruhig bleiben.');
+ else if(M.ver<v0)L.push('Der Verdacht sinkt auf '+M.ver+' %.');
+}
+const KHEAD=['TV-Liebling schaut schwarz!','Glanz-Star mit Schatten-Kabel erwischt!','Vom roten Teppich in den Kabelsalat!','Wäscheständer war eine Antenne: Promi-Skandal!'];
+function medRazzia(){
+ const M=G.med,ill=M.subs.filter(s=>!s.legal&&!mIsAbroad(s.h)),lost=[];
+ const n=ill.length?Math.max(1,Math.round(ill.length*.4)):0;
+ for(let i=0;i<n&&ill.length;i++){const s=ill.splice(rnd(0,ill.length-1),1)[0];M.subs=M.subs.filter(x=>x!==s);lost.push(s);}
+ M.codes.forEach(c=>{if(c.t!=='turm')c.ban=true;});
+ M.subs.forEach(s=>{const c=mCode(s.c);if(c&&c.ban)medBreak(s,'code');});
+ ['ant','rec','box'].forEach(k=>{M.hw[k]=Math.floor(M.hw[k]/2);});
+ const fine=Math.min(G.cash,300+Math.round(G.cash*.1));G.cash-=fine;M.ver=35;M.razQ=0;
+ let sk='';
+ if((M.ruf||0)>=10){const r0=Math.round(M.ruf);M.ruf=Math.floor(M.ruf/2);let q=0;M.subs.filter(s=>s.legal).forEach(s=>{if(chance(.3)){M.subs=M.subs.filter(x=>x!==s);q++;}});sk='SKANDAL! Das Rheinhanfener Tratschblatt titelt: „'+pick(KHEAD)+'“ Ruf '+r0+' → '+M.ruf+(q?', '+q+' legale Kunden kündigen.':'.');}
+ popAdd(-3);sfx('bonk');if(!ZONE)medSync();mktSync();
+ karQ({title:'RAZZIA!',text:'Morgens um sechs klingelt es Sturm: Die Medienpolizei! Sie bauen '+lost.length+' Anschlüsse ab, sperren alle Codes und nehmen das halbe Lager mit. Strafe: '+eur(fine)+'. Der Verdacht sinkt auf 35 %.',lines:(sk?[sk]:[]).concat(['Tipp: Tarnsets, Kabel statt Antenne oder legal umstellen senkt den Verdacht.']),choices:[{label:'Mist!',a:'mclose'}]});
+}
+function zReach(sx,sy){
+ const W=MW,H=MH,D=new Int16Array(W*H).fill(-1);
+ const ok=(i,j)=>i>0&&j>0&&i<W-1&&j<H-1&&!isSolid(i,j)&&tget(i,j)!==DP;
+ if(!ok(sx,sy)){let f=null;for(let r=1;r<8&&!f;r++)for(let j=sy-r;j<=sy+r&&!f;j++)for(let i=sx-r;i<=sx+r;i++)if(ok(i,j)){f=[i,j];break;}if(!f)return D;sx=f[0];sy=f[1];}
+ const q=[sx,sy];D[sy*W+sx]=0;let k=0;
+ while(k<q.length){const i=q[k++],j=q[k++],d=D[j*W+i];
+  if(ok(i+1,j)&&D[j*W+i+1]<0){D[j*W+i+1]=d+1;q.push(i+1,j);}
+  if(ok(i-1,j)&&D[j*W+i-1]<0){D[j*W+i-1]=d+1;q.push(i-1,j);}
+  if(ok(i,j+1)&&D[(j+1)*W+i]<0){D[(j+1)*W+i]=d+1;q.push(i,j+1);}
+  if(ok(i,j-1)&&D[(j-1)*W+i]<0){D[(j-1)*W+i]=d+1;q.push(i,j-1);}
+ }
+ return D;
+}
+function zCands(z,D,mks){
+ const W=MW,H=MH,C=[];
+ const free=(i,j,r)=>!mks.some(q=>Math.abs(q[0]-i)<=r&&Math.abs(q[1]-j)<=r);
+ const open=(i,j)=>{let n=0;for(let b=-1;b<=1;b++)for(let a=-1;a<=1;a++)if(D[(j+b)*W+i+a]>=0)n++;return n>=8;};
+ for(let j=2;j<H-2;j++)for(let i=2;i<W-2;i++){const d=D[j*W+i];if(d<0||!open(i,j)||!free(i,j,2))continue;C.push([i,j,d]);}
+ return{C:C,free:free};
+}
+function mktGen(z){
+ const M=G.med,st=M.mk[z.name]||(M.mk[z.name]={});
+ if(st.sp&&st.sp.length===4&&st.c)return st;
+ const D=zReach(Math.floor(z.spawn.x/TS),Math.floor(z.spawn.y/TS));
+ const mks=z.MKS.map(m=>[Math.floor(m.x/TS),Math.floor(m.y/TS)]);
+ const R=zCands(z,D,mks),C=R.C;if(!C.length)return st;
+ const c=C.filter(q=>q[2]>=3&&q[2]<=9).sort((a,b)=>a[2]-b[2])[0]||C[0];
+ st.c={x:c[0],y:c[1]};mks.push([c[0],c[1]]);
+ const rr=zrng(z.name.length*7717+z.name.charCodeAt(1)*131+z.name.charCodeAt(0));
+ for(let k=C.length-1;k>0;k--){const r=Math.floor(rr()*(k+1));const t=C[k];C[k]=C[r];C[r]=t;}
+ const sp=[];
+ [9,7,5,3,1].forEach(gap=>{C.forEach(q=>{if(sp.length>=4||q[2]<5)return;if(sp.some(s=>Math.hypot(s.x-q[0],s.y-q[1])<gap))return;if(!R.free(q[0],q[1],2))return;sp.push({x:q[0],y:q[1]});mks.push([q[0],q[1]]);});});
+ let k=0;while(sp.length<4&&k<C.length){const q=C[k++];if(!sp.some(s=>s.x===q[0]&&s.y===q[1]))sp.push({x:q[0],y:q[1]});}
+ st.sp=sp;return st;
+}
+function zNear(z,tx,ty){
+ const D=zReach(Math.floor(z.spawn.x/TS),Math.floor(z.spawn.y/TS));
+ const mks=z.MKS.map(m=>[Math.floor(m.x/TS),Math.floor(m.y/TS)]);
+ const C=zCands(z,D,mks).C;let b=null,bd=1e9;C.forEach(q=>{const d=Math.hypot(q[0]-tx,q[1]-ty);if(d<bd){bd=d;b=q;}});
+ return b?{x:b[0]*TS+16,y:b[1]*TS+16}:{x:z.spawn.x+64,y:z.spawn.y};
+}
+function mktEnter(z){
+ if(!G||!G.med)return;karInit(G.med);
+ const D=MKT[z.name];
+ if(D){
+  const st=mktGen(z);
+  if(!z._mk&&st.sp&&st.c){z._mk=1;
+   z.MKS.push({id:'mkc',dist:'',kind:'sk',sk:'mkt',zi:z.name,x:st.c.x*TS+16,y:st.c.y*TS+16,n:D.chef,act:'Mit '+D.chef+' reden',col:'#ffd23f'});
+   st.sp.forEach((p,i)=>z.MKS.push({id:'msp'+i,dist:'',kind:'sk',sk:'mspot',zi:z.name,si:i,med:1,x:p.x*TS+16,y:p.y*TS+16,n:D.sp+' '+(i+1),col:'#c8d0d8'}));
+  }
+  mktSync(z);
+ }
+ if(z.name==='amt'&&!z._amt){z._amt=1;const p=zNear(z,18,14);z.MKS.push({id:'slic',dist:'',kind:'sk',sk:'slic',x:p.x,y:p.y,n:'Schalter 7: Sendelizenzen',act:'Schalter 7: Sendelizenz beantragen',col:'#7ad35a'});}
+ if(z.name==='sender'&&!z._sv){z._sv=1;const p=zNear(z,10,13);z.MKS.push({id:'svstudio',dist:'',kind:'sk',sk:'svstudio',x:p.x,y:p.y,n:'Studio Senderviertel',act:'Studio Senderviertel: eigene Show drehen',col:'#ffd23f'});}
+}
+function mktSync(z){
+ z=z||ZONE;if(!z||!MKT[z.name]||!G||!G.med)return;
+ z.MKS.forEach(m=>{if(m.sk!=='mspot')return;const s=G.med.subs.find(x=>x.h==='z:'+z.name+':'+m.si);
+  m.col=!s?'#c8d0d8':!s.ok?'#ff5f5f':s.legal?'#7ad35a':'#5fd0ff';
+  m.act=m.n+(!s?': anschließen':!s.ok?': Bild weg!':': läuft ('+(s.legal?'legal':'schwarz')+')');});
+}
+function mktNeed(D,leg){
+ const M=G.med,hw=M.hw,L=[];
+ if((M.skill||0)<1)L.push('Technik Stufe 1 (Netzcafé)');
+ if(hw.rec+hw.box<1)L.push('Receiver');
+ if(hw.ant+hw.kab<1)L.push('Antenne oder Kabel');
+ if(leg){if(!M.slic.eu)L.push('Euro-Sendelizenz (Amt für Alles)');if(D.live&&!M.lic.l)L.push('Live-Lizenz (Hollyhanf)');}
+ else if(!medFreeCode(D.live))L.push(D.live?'Code mit Live-TV (Xtream)':'Code mit freiem Platz');
+ return L;
+}
+function mktChef(m){
+ const z=m.zi,D=MKT[z],n=mktCount(z),ok=G.med.subs.filter(s=>mIsAbroad(s.h)&&s.h.split(':')[1]===z&&s.ok).length;
+ mdl(D.chef,D.txt+' Hier gibt es 4 Anschlüsse (Typ: '+D.sp+') mit je '+D.v+' Zuschauern, '+eur(D.fee)+' pro Tag.'+(D.live?' Die Leute wollen Live-TV!':'')+' Angeschlossen: '+n+' von 4'+(n>=3?' (Markt erschlossen!)':' (ab 3 ist der Markt erschlossen)')+'.'+(n>ok?' '+(n-ok)+' mit Störung!':''),[['Navi zum nächsten Anschluss','yk:mq:nav'],['Wie geht das legal?','yk:mq:hleg'],['Und wie geht das schwarz?','yk:mq:hill']]);
+}
+function mktSpotMenu(m){
+ const z=m.zi,i=m.si,D=MKT[z],id='z:'+z+':'+i,M=G.med,s=M.subs.find(x=>x.h===id);UI.mspot=id;
+ const nm=D.sp+' '+(i+1)+' · '+D.ort;
+ if(s&&!s.ok){const fc=s.legal?true:medFreeCode(D.live);mdl(nm,'Bild weg! '+(s.why==='code'&&!s.legal?'Der Code ist gesperrt oder abgelaufen.':'Die Box hängt.'),[[s.why==='code'&&!s.legal?'Neuen Code einspielen'+(fc?'':' (kein passender Code)'):'Box neu starten','yk:mq:fix',s.why==='code'&&!s.legal&&!fc]]);return;}
+ if(s){const nl=[];if(!M.slic.eu)nl.push('Euro-Sendelizenz');if(D.live&&!M.lic.l)nl.push('Live-Lizenz');
+  mdl(nm,'Läuft '+(s.legal?'legal':'schwarz')+' seit Tag '+s.since+'. '+D.v+' Zuschauer, '+eur(s.fee)+' pro Tag.',s.legal?[['Hallo sagen','yk:mi:hallo']]:[['Auf legal umstellen'+(nl.length?' (fehlt: '+nl.join(', ')+')':': bringt Ruf, senkt Verdacht'),'yk:mq:conv',nl.length>0]]);return;}
+ const ni=mktNeed(D,false),nl=mktNeed(D,true);
+ mdl(nm,D.txt+' Hier schauen '+D.v+' Leute zu, Gebühr '+eur(D.fee)+' pro Tag.'+(D.live?' Braucht Live-TV!':'')+' Lager: '+medHwLine()+'.',[
+  ['Schwarz anschließen: schnell und billig'+(ni.length?' (fehlt: '+ni.join(', ')+')':', Verdacht steigt'),'yk:mq:ins',ni.length>0],
+  ['Legal anschließen: kein Risiko, bringt Ruf'+(nl.length?' (fehlt: '+nl.join(', ')+')':''),'yk:mq:leg',nl.length>0]]);
+}
+function mktInstall(leg){
+ const id=UI.mspot,p=mPlace(id);if(!p)return;const D=MKT[p.z],L=mktNeed(D,leg);
+ if(L.length){toast('Dir fehlt noch: '+L.join(', ')+'.');return;}
+ const x=p.x/TS,y=(p.y+2)/TS;P.x=p.x;P.y=p.y+2;
+ kpStart({pts:[[x,y],[x,y-1.4],[x+.4,y-1.4],[x,y]],mode:'const',v0:55,face:-Math.PI/2,med:1,msg:leg?'Mit Warnweste und Euro-Lizenz: alles ganz offiziell …':'Schnell die Schüssel festschrauben, bevor jemand fragt …',end:()=>mktDone(id,leg)});
+}
+function mktDone(id,leg){
+ const p=mPlace(id),D=MKT[p.z],M=G.med,hw=M.hw;if(M.subs.some(s=>s.h===id))return;
+ if(mktNeed(D,leg).length){toast('Hoppla, dir fehlt plötzlich was.');return;}
+ const box=hw.box>0;if(box)hw.box--;else hw.rec--;
+ let ct='ant';if(hw.kab>0&&(leg||hw.ant<1)){hw.kab--;ct='kab';}else hw.ant--;
+ const code=leg?null:medFreeCode(D.live);
+ const fee=Math.round(D.fee*(box?1.2:1)*(leg?.85:1));
+ M.subs.push({h:id,c:leg?'legal':code.id,typ:ct,fee:fee,ok:true,box:box,tarn:true,legal:leg,since:G.day});
+ const rw=Math.round(D.fee*.8);G.cash+=rw;G.stats.earned+=rw;xpAdd(8);popAdd(1);sfx('coin');
+ if(leg)rufAdd(3);else verAdd(2);
+ mktSync();const n=mktCount(p.z);
+ toast('Angeschlossen! '+D.sp+' '+(p.i+1)+' schaut jetzt dein Programm: +'+D.v+' Zuschauer, +'+eur(rw)+', ab jetzt '+eur(fee)+' pro Tag.');
+ if(n===3){sfx('win');karQ({title:D.ort+' erschlossen!',text:D.chef+' strahlt: „Endlich Fernsehen! Du bist hier ab jetzt eine Legende.“ Der Markt '+D.ort+' zählt jetzt für deine Karriere.',lines:['Märkte erschlossen: '+mktDoneN()],choices:[{label:'Weiter',a:'mclose'}]});}
+ karCheck();
+}
+function mktFix(){
+ const id=UI.mspot,M=G.med,s=M.subs.find(x=>x.h===id),p=mPlace(id);if(!s||s.ok||!p)return;const D=MKT[p.z];
+ if(s.why==='code'&&!s.legal){const c=medFreeCode(D.live);if(!c){toast('Du brauchst einen passenden Code mit freiem Platz'+(D.live?' und Live-TV (Xtream).':'.'));return;}s.c=c.id;}
+ s.ok=true;s.why='';const tip=rnd(15,35);G.cash+=tip;G.stats.earned+=tip;sfx('ok');mktSync();
+ toast('Bild ist wieder da! '+D.chef+' klatscht Beifall. +'+eur(tip)+' Trinkgeld.');
+}
+function mktZDraw(z,cx,cy){
+ if(!MKT[z.name]||!G||!G.med)return;
+ z.MKS.forEach(m=>{if(m.sk!=='mspot'||m.x<cx-60||m.x>cx+VW+60||m.y<cy-80||m.y>cy+VH+60)return;
+  const s=G.med.subs.find(x=>x.h==='z:'+z.name+':'+m.si),x=m.x+20,y=m.y-6;
+  ctx.fillStyle='#5a6270';ctx.fillRect(x-1.5,y-22,3,24);
+  if(!s){ctx.fillStyle='#e8e2d0';ctx.fillRect(x-9,y-30,18,11);ctx.fillStyle='#444';ctx.font='bold 9px Arial';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('TV?',x,y-24);}
+  else if(s.legal){ctx.fillStyle='#f4f6f8';ctx.beginPath();ctx.ellipse(x+2,y-24,9,6,-.5,0,6.283);ctx.fill();ctx.strokeStyle='#5a6270';ctx.beginPath();ctx.moveTo(x+2,y-24);ctx.lineTo(x+9,y-29);ctx.stroke();}
+  else{ctx.strokeStyle='#4a4a52';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x-8,y-20);ctx.lineTo(x+8,y-20);ctx.moveTo(x-6,y-15);ctx.lineTo(x+6,y-15);ctx.stroke();ctx.lineWidth=1;}
+  if(s){ctx.fillStyle=!s.ok?(Math.floor(timeNow*3)%2?'#ff5f5f':'#ffd23f'):'#7ad35a';ctx.beginPath();ctx.arc(x,y-34,3,0,6.283);ctx.fill();}
+ });
+ ctx.textAlign='start';
+}
+function slicMenu(){
+ const M=G.med,S=M.slic;
+ mdl('Schalter 7: Sendelizenzen','Sachbearbeiterin Frau Stempelmann schiebt ihre Brille hoch: „Sendelizenz? Formular 7b in dreifacher Ausfertigung. Ich mach das mal schnell für Sie, ausnahmsweise.“ Dein Ruf: '+Math.round(M.ruf||0)+'.',[
+  [S.rh?'Sendelizenz Rheinhanfen: hast du':'Sendelizenz Rheinhanfen: 400 €','yk:mq:slr',!!S.rh||G.cash<400],
+  [S.eu?'Euro-Sendelizenz: hast du':'Euro-Sendelizenz: 3.000 € (ab Ruf 15)','yk:mq:sle',!!S.eu||!S.rh||(M.ruf||0)<15||G.cash<3000],
+  ['Was bringt mir das?','yk:mq:sinfo']]);
+}
+function skAct23(p){
+ if(p.indexOf('yk:mq:')!==0)return false;
+ const q=p.slice(6),M=G.med;UI.modal=null;render2();
+ if(q==='ins'||q==='leg'){mktInstall(q==='leg');return true;}
+ if(q==='fix'){mktFix();return true;}
+ if(q==='conv'){const s=M.subs.find(x=>x.h===UI.mspot),p2=mPlace(UI.mspot);if(!s||s.legal||!p2)return true;const D=MKT[p2.z];if(!M.slic.eu||(D.live&&!M.lic.l))return true;s.legal=true;s.c='legal';s.fee=Math.round(s.fee*.85);rufAdd(2);verAdd(-3,true);sfx('ok');mktSync();toast('Umgestellt auf legal! Frau Stempelmann wäre stolz auf dich.');return true;}
+ if(q==='hconv'){const s=M.subs.find(x=>x.h===UI.mh);if(!s||s.legal||!M.slic.rh)return true;s.legal=true;s.c='legal';s.tarn=false;s.fee=Math.round(s.fee*.85);rufAdd(2);verAdd(-3,true);sfx('ok');medSync();toast('Umgestellt auf legal! Kein Spürwagen interessiert sich mehr für diesen Anschluss.');return true;}
+ if(q==='nav'){const z=ZONE&&ZONE.name;const L=medTargets().filter(o=>o.w===z);if(!L.length){toast('Hier ist alles angeschlossen und läuft.');return true;}L.sort((a,b)=>mD(a.h)-mD(b.h));medNavSet(L[0].id);return true;}
+ if(q==='hleg'){toast('Legal: Euro-Sendelizenz im Amt für Alles (ab Ruf 15), dazu Receiver und Kabel oder Antenne. Für Live-TV die Live-Lizenz aus Hollyhanf. Kein Risiko, bringt Ruf.');return true;}
+ if(q==='hill'){toast('Schwarz: ein Code mit freiem Platz (für Live-TV ein Xtream-Code), dazu Receiver und Antenne. Schnell und billig, aber der Verdacht steigt.');return true;}
+ if(q==='slr'){if(M.slic.rh||G.cash<400)return true;G.cash-=400;M.slic.rh=1;rufAdd(5);sfx('win');toast('Stempel, Stempel, Unterschrift! Du darfst jetzt in Rheinhanfen legal anschließen. Frau Stempelmann klebt dir ein Bienchen ins Formular.');karCheck();return true;}
+ if(q==='sle'){if(M.slic.eu||!M.slic.rh||(M.ruf||0)<15||G.cash<3000)return true;G.cash-=3000;M.slic.eu=1;rufAdd(5);sfx('win');toast('Euro-Sendelizenz! Gültig in ganz Europa und auf dem Mond (Formular 7c fehlt noch).');return true;}
+ if(q==='sinfo'){toast('Mit Sendelizenz schließt du legal an: kein Code, keine Sperre, kein Spürwagen, und dein Ruf steigt. Mit hohem Ruf zahlen legale Kunden mehr.');return true;}
+ if(q==='tprem'){if(!M.kf||M.prem||M.tower!==2)return true;const v=M.vids.filter(x=>x.kf).pop();M.prem=2;verAdd(15);mood(15,'+15 Premiere');sfx('win');
+  startFade('Du drückst den großen roten Knopf. Der Fernsehturm leuchtet, und auf jedem Bildschirm in Rheinhanfen läuft: „'+(v?v.ti:'Dein Film')+'“!',()=>{karQ({title:'Untergrund-Premiere!',text:'Ganz Rheinhanfen schaut „'+(v?v.ti:'deinen Film')+'“. Die GlotzKonzern AG tobt, die Leute jubeln. Niemand weiß, wer dahintersteckt. Fast niemand.',choices:[{label:'Weiter',a:'mclose'}]});karCheck();});return true;}
+ if(q==='prem2'){if(!M.kf||M.prem)return true;if((M.ruf||0)<25){toast('Für den roten Teppich brauchst du Ruf 25. Du hast '+Math.round(M.ruf||0)+'.');return true;}const v=M.vids.filter(x=>x.kf).pop();M.prem=1;rufAdd(20);mood(15,'+15 Premiere');sfx('clap');
+  startFade('Roter Teppich, Blitzlichtgewitter, Desirée Glitzer winkt. Film ab: „'+(v?v.ti:'Dein Film')+'“!',()=>{karQ({title:'Premiere in Hollyhanf!',text:'Standing Ovations für „'+(v?v.ti:'deinen Film')+'“! Die Kritik schreibt: „'+pick(VKRIT.slice(2))+'“',choices:[{label:'Weiter',a:'mclose'}]});karCheck();});return true;}
+ return true;
+}
+function karScreen(){
+ const M=G.med,st=M.st;
+ let b='<div class="b">Dein Titel: <b class="am">'+MSTUFE[st].n+'</b> · '+zus()+' Zuschauer · <span class="gr">Ruf '+Math.round(M.ruf||0)+'</span> · <span class="rd">Verdacht '+(M.ver||0)+' %</span> · Programm '+prog()+'</div>';
+ for(let i=1;i<MSTUFE.length;i++){
+  const s=MSTUFE[i];
+  if(i<=st)b+='<div class="b" style="opacity:.7">✓ <b>'+s.n+'</b> geschafft</div>';
+  else if(i===st+1){const T=KTIP[i];b+='<div class="b" style="border:2px solid var(--am)"><b class="am">Nächstes Ziel: '+s.n+'</b><br>'+karChecks(i).map(c=>(c.ok?'✓ ':'○ ')+c.l+(c.b?' ('+Math.min(c.a,c.b)+' / '+c.b+')':'')).join('<br>')+'<br><span class="gr">Glanz (legal):</span> '+T.g+'<br><span class="rd">Schatten (illegal):</span> '+T.s+'<br>'+T.x+'</div>';}
+  else b+='<div class="b" style="opacity:.55">🔒 <b>'+s.n+'</b>: '+karChecks(i).map(c=>c.s+(c.b?' '+c.b:'')).join(', ')+'</div>';
+ }
+ if(st>=5)b+='<div class="b"><b class="am">Du bist der Entertain Master!</b> Alles Weitere ist Zugabe.</div>';
+ return{hint:'Hoch und Runter: blättern · Zurück: schließen',html:'<div class="place" style="max-width:54rem">'+mHd('Karriere: Vom Pizzaboten zum Entertain Master','Gemessen wird in Zuschauern. Glanz (legal) und Schatten (illegal) führen beide ans Ziel, mischen ist erlaubt. Aber: Wer mit viel Ruf beim Schummeln erwischt wird, bekommt einen Skandal.')+'<div class="panel" style="max-height:62vh;overflow:auto">'+b+'</div>'+btn('Zurück','back',null,{def:1})+'</div>'};
+}
+function karRegister(){
+ SCREENS.kar=karScreen;MEDS.kar=1;
+ Object.assign(KSKM,{mkt:m=>mktChef(m),mspot:m=>mktSpotMenu(m),slic:()=>slicMenu(),svstudio:()=>vdStart('sv')});
+ Object.assign(ACT,{karS(){UI.karFrom=UI.screen;show('kar');}});
+}
+
 const H={
  G:()=>G,champOk,champHint,startsN,bumpStarts,newGame,saveAll,hasSave,loadAll,GOODS,TRADE,DIST,MARKETS,UPS,BRAU_CAP,HAUS_CAP,SHOP,eur,price,sellP,pedPrice,cap,used,worth,rank,clock,hour,buyAt,needAt,buyNeeded,gq,
  mTitle,mLine,canPickup,canDeliver,whyNot,accept,abandon,pickup,deliver,buy,sell,startBrew,startGrow,collect,buyUp,payDebt,loan,
@@ -9463,7 +9836,7 @@ function hudHtml(){
  const hun=g.hun===undefined?80:g.hun,dur=g.dur===undefined?80:g.dur,dr=clamp((g.drunk||0)/6*100,0,100),hi=clamp((g.high||0)/150*100,0,100);
  return '<div class="chip"><small>TAG '+g.day+(night&&!ZONE?' · NACHT':'')+(wxLabel()?' · '+wxLabel():'')+'</small><b class="am">'+H.clock()+'</b></div>'+
   '<div class="chip"><small>BARGELD</small><b class="gr">'+eur(g.cash)+'</b><span class="sub">'+(g.debt>0?'Vorschuss <span class="rd">'+eur(g.debt)+'</span>':'schuldenfrei')+'</span></div>'+
-  '<div class="chip h"><small>'+(wanted?'POLIZEI':'RANG · '+medFame()+' RUHM')+'</small><b class="'+(wanted?'rd':'am')+'">'+(wanted?st:((g.heroE||0)>=100?'SUPER-KONFETTI!':medRank()))+'</b><div class="hb" style="height:.32rem;margin-top:.1rem"><i style="width:'+Math.round(g.heroE||0)+'%;background:#ffd23f"></i></div></div>'+
+  '<div class="chip h"><small>'+(wanted?'POLIZEI':'STUFE '+(medRankI()+1)+'/6 · '+zus()+' ZUSCHAUER')+'</small><b class="'+(wanted?'rd':'am')+'">'+(wanted?st:medRank()+((g.heroE||0)>=100?' ✨':''))+'</b><div class="hb" style="height:.32rem;margin-top:.1rem"><i style="width:'+karPct()+'%;background:#ffd23f"></i></div></div>'+
   '<div class="chip wb">'+
    m('LAUNE',g.mood,moodCol(),moodWord(),g.mood<25)+
    m(hun<25?'HUNGER!':'ESSEN',hun,needCol(hun),hun>=70?'satt':hun>=40?'geht so':hun>=20?'hungrig':'Bärenhunger',hun<25)+
@@ -9516,7 +9889,7 @@ function hudUpdate(){
  if(!G||UI.title){hudEl.style.display='none';trk.style.display='none';pr.style.display='none';mmEl.style.display='none';return;}
  hudEl.style.display='flex';trk.style.display='block';mmEl.style.display=MMPREF==='aus'?'none':'block';
  const h=hudHtml();if(h!==UI.hudS){UI.hudS=h;hudEl.innerHTML=h;}
- let t='';
+ let t=karTrk()+medTrk();
  G.active.forEach(m=>{
   const c=m.t==='kurier'?'k':m.t==='rezept'?'b':'';
   let s=m.t==='kurier'?(m.got?'Paket zu: '+DIST[m.to].n:'Paket holen: '+DIST[m.from].n):m.t==='rezept'?(m.got?'Rezept zu: '+DIST[m.to].n:'Rezept holen: Rhein-Apotheke'):gq(m.item,m.q)+' ('+Math.min(G.inv[m.item]||0,m.q)+' dabei) → '+DIST[m.to].n;
@@ -9533,15 +9906,12 @@ function hudUpdate(){
 
 const SCREENS={
  title(){
-  return{hint:'Pfeiltasten: wählen · OK: bestätigen',cls:'t',html:'<div class="title"><h1>ENTERTAIN <span>·</span> MASTER</h1><p>Rheinhanfen · Codes, Kabel, Kino &amp; Quatsch</p><div class="menu">'+
+  return{hint:'Pfeiltasten: wählen · OK: bestätigen',cls:'t',html:'<div class="title"><h1>ENTERTAIN <span>·</span> MASTER</h1><p>Vom Pizzaboten zum größten Unterhaltungs-Imperium Europas</p><div class="menu">'+
    btn('Neues Spiel','new',null,{def:1})+(H.hasSave()?btn('Spiel fortsetzen','cont'):'')+btn('Anleitung','help')+btn('Beenden','quit')+'</div></div>'};
  },
  help(){
   return{hint:'Hoch und Runter: blättern · OK oder Zurück: schließen',html:'<div class="place" style="max-width:46rem;display:flex;flex-direction:column;overflow:hidden"><h2>So geht\'s</h2><div class="panel" style="flex:1 1 auto">'+
-   '<p><b class="am">Worum geht\'s?</b> Du fängst in Rheinhanfen ganz klein an: Feldbett im Imbiss von Hanfred Hanfbier, alter Hacker-PC im Hinterzimmer. Die Leute wollen alle Sender, die neuesten Filme und Serien. Besorg Codes, schraub Antennen aufs Dach, verleg heimlich Kabel und lass dich nicht von den Spürwagen erwischen.</p>'+
-   '<p><b class="am">Dein Ziel:</b> Werde der Entertain Master! Mehr Kunden bringen Geld und Ruhm. Kauf Kino und Autokino, dreh in Hollyhanf eigene Videos, hol dir Lizenzen und übernimm am Ende den Fernsehturm. Verlieren kannst du nicht, höchstens pleite und unbeliebt sein.</p>'+
-   '<p><b class="am">Und zwischendurch:</b> Lieferdienst und Apotheke bleiben kleine Nebenjobs, Bier und Gras sind nur noch zum Genießen. Eigene Wohnung, Camping in Holland, Freibad, Rodelbahn, Skifahren: Überall passiert etwas Lustiges.</p>'+
-   '<p><b class="am">Steuerung:</b> Pfeiltasten laufen und lenken. OK macht das, was unten am Bildrand steht. Zurück öffnet das Menü mit Medien-Zentrale, Rucksack, Karte und Europa-Karte.</p>'+
+   '<p><b class="am">Worum geht\'s?</b> Vom Pizzaboten zum Entertain Master: Bau das größte Unterhaltungs-Imperium Europas. Gemessen wird in Zuschauern. Unten links steht dein nächstes Ziel, alle Stufen und Tipps im Menü unter „Karriere“.</p>'+'<p><b class="gr">Glanz (legal):</b> Sendelizenz im Amt für Alles, Filmrechte in Hollyhanf, eigene Shows, Kino. Sicher, bringt Ruf. <b class="rd">Schatten (illegal):</b> Codes, Antennen, heimliche Kabel, Fernsehturm. Billig und schnell, aber der Verdacht steigt. Bei 100 % kommt die Razzia, mit viel Ruf auch ein Skandal.</p>'+'<p><b class="am">Europa:</b> Auf der Europa-Karte warten elf Märkte, von Camping NL bis Köln. Sprich mit dem Ansprechpartner, das Navi zeigt die Anschlüsse. Fußball und Karneval brauchen Live-TV.</p>'+'<p><b class="am">Nebenbei:</b> Lieferjobs gibt es nur am Anfang fürs Startgeld. Eigene Wohnung, Freibad, Rodelbahn, Skifahren, Bier und Gras sind nur für die Laune da.</p>'+'<p><b class="am">Steuerung:</b> Pfeiltasten laufen und lenken. OK macht das, was unten am Bildrand steht. Zurück öffnet das Menü mit Karriere, Medien-Zentrale, Rucksack, Karte und Europa-Karte.</p>'+
    '<p><b class="am">Gut zu wissen:</b> Essen und Trinken nicht vergessen, die Leiste oben zeigt, wie es dir geht. Alkohol und Gras nur für Erwachsene und nie in der Nähe von Kindern. Sucht dich die Polizei, versteck dich. Niemand stirbt, alles ist Fiktion: Codes, Sender und Filme sind ausgedacht.</p>'+
    '</div><div style="margin-top:.5rem">'+btn('Alles klar!','back',null,{def:1})+'</div></div>'};
  },
@@ -9550,7 +9920,7 @@ const SCREENS={
   const g=G,w=H.worth();
   let ns='';g.events.forEach(e=>{ns+='<div class="news">'+e.t+'</div>';});
   return{hint:'Pfeiltasten: wählen · OK: bestätigen · Zurück: weiterspielen',html:'<div class="pmenu"><div class="hd"><h2>Menü</h2><div class="mu">Laune: '+moodWord()+' · Vermögen '+eur(w)+' · Respekt '+g.resp+' · Rang: '+H.rank(w)+'</div><div class="mu">Held: '+heroRank()+' ('+Math.floor(g.hero||0)+' Punkte) · Fänge '+(g.fang||0)+' · Haizähne '+(g.zahn||0)+' · Mitmachen '+(g.mm||0)+'</div><div class="mu">Stufe '+(g.lvl||1)+' ('+Math.floor(g.xp||0)+' / '+lvlNeed(g.lvl||1)+' EP) · Beliebtheit: '+popWord()+' · Stadt sauber: '+Math.round(g.clean===undefined?40:g.clean)+' % · Besitz: '+ownCount()+' Landschaften · Zuhause: '+homeShort()+'</div>'+ns+'</div>'+
-   btn('Weiterspielen','back',null,{def:1})+btn('Medien-Zentrale: '+medSum(),'medS')+btn('Handy: Nebenjobs ('+g.active.length+'/4)','missions')+btn('Rucksack','inv')+btn('Feststecken? Befreien','freeMe')+btn('Pflanzen-Cam ('+((g.plants||[]).length)+' / 3)','growS')+btn('Karte','map')+btn('Europa-Karte','euro')+btn('Van rufen (25 €)','vanCall')+btn('Ton: '+(SND.on?'an':'aus'),'snd')+btn('Minikarte: '+MMPREF,'mmpref')+btn('Touch-Tasten: '+({auto:'automatisch',off:'aus',on:'an'}[TPREF]),'tpref')+btn('Anleitung','help')+btn('Speichern und zum Titel','saveExit')+btn('Beenden','quit')+'</div>'};
+   btn('Weiterspielen','back',null,{def:1})+btn('Karriere: '+medRank()+' · Ziel ansehen','karS')+btn('Medien-Zentrale: '+medSum(),'medS')+btn('Handy: Nebenjobs ('+g.active.length+'/4)','missions')+btn('Rucksack','inv')+btn('Feststecken? Befreien','freeMe')+btn('Pflanzen-Cam ('+((g.plants||[]).length)+' / 3)','growS')+btn('Karte','map')+btn('Europa-Karte','euro')+btn('Van rufen (25 €)','vanCall')+btn('Ton: '+(SND.on?'an':'aus'),'snd')+btn('Minikarte: '+MMPREF,'mmpref')+btn('Touch-Tasten: '+({auto:'automatisch',off:'aus',on:'an'}[TPREF]),'tpref')+btn('Anleitung','help')+btn('Speichern und zum Titel','saveExit')+btn('Beenden','quit')+'</div>'};
  },
  euro(){
   const cur=ZONE?ZONE.name:'city',dk=cur==='bayern'?'city':'bayern';
@@ -9564,7 +9934,7 @@ const SCREENS={
   return{hint:'Pfeiltasten: Reiseziel wählen · OK: losreisen · Zurück: schließen',html:h};
  },
  map(){
-  return{hint:'Zurück: schließen',html:'<div class="hd"><h2>Karte von Rheinhanfen</h2><div class="mu">Gelb: Läden · Grün: Imbiss · Türkis: Büdchen · Lila: Portale · Weiße Ringe: Auftragsziele · Braun: ausgebüxte Tiere</div></div><canvas id="bigmap" width="304" height="192" style="width:100%;max-height:78%;border:2px solid var(--ln);border-radius:.4rem;image-rendering:pixelated"></canvas><div style="max-width:14rem">'+btn('Zurück','back',null,{def:1})+'</div>'};
+  return{hint:'Zurück: schließen',html:'<div class="hd"><h2>Karte von Rheinhanfen</h2><div class="mu">Gelb: Läden · Grün: Imbiss · Türkis: Büdchen · Lila: Portale · Braun: ausgebüxte Tiere<br>Weiße Ringe: deine Ziele · <span style="color:#5fd0ff">Blau: Fernsehen einrichten</span> · <span style="color:#ff8ad8">Rosa: Film bringen</span> · <span style="color:#7ad35a">Grün: legal</span> · <span style="color:#ff5f5f">Rot: Bild weg</span> · Blaue Pünktchen: deine Kunden'+medMapNav()+'</div></div><canvas id="bigmap" width="304" height="192" style="width:100%;max-height:78%;border:2px solid var(--ln);border-radius:.4rem;image-rendering:pixelated"></canvas><div style="display:flex;gap:.6rem;max-width:44rem"><div style="flex:1">'+btn('Zurück','back',null,{def:1})+'</div>'+(medTargets().length>1&&!ZONE?'<div style="flex:2">'+btn('Navi: nächstes Ziel','medNavNext')+'</div>':'')+'</div>'};
  },
  place(){
   const g=G,mk=UI.mk,d=DIST[mk.dist]||{n:mk.n,sub:'',d:''};let b='',df=0;
@@ -9587,7 +9957,7 @@ const SCREENS={
    const st=pk(m)?(m.got?'Päckchen dabei':'Noch abzuholen: '+DIST[m.from].n):'Dabei: '+Math.min(g.inv[m.item]||0,m.q)+' / '+m.q;
    r+='<div class="f card" data-a="abandonAsk" data-p="'+m.id+'">'+tag(m)+'<b>'+H.mTitle(m)+'</b><div>'+H.mLine(m)+'</div><div class="rw">'+eur(m.rw)+' · bis Tag '+m.dl+' · '+st+'</div></div>';
   });
-  if(!l)l='<div class="mu">Heute keine neuen Angebote.</div>';
+  if(!l)l='<div class="mu">'+(G.med&&(G.med.st||0)>=2?'Keine Lieferjobs mehr: Du bist jetzt Medienprofi. Kalle übernimmt deine alte Pizza-Tour.':'Heute keine neuen Angebote.')+'</div>';
   if(!r)r='<div class="mu">Du hast keine laufenden Aufträge.</div>';
   return{hint:'Links OK: annehmen · Rechts OK: abbrechen · Zurück: schließen',html:'<div class="two" style="height:calc(100% - 3.2rem)"><div class="panel"><h3>Angebote ('+g.offers.length+')</h3><div class="sc">'+l+'</div></div><div class="panel"><h3>Laufend ('+g.active.length+'/4)</h3><div class="sc">'+r+'</div></div></div><div style="max-width:14rem">'+btn('Zurück','back',null,{def:g.offers.length+g.active.length?0:1})+'</div>'};
  },
@@ -9805,7 +10175,7 @@ const ACT={
  new(){
   toCity();H.newGame();UI.fkm={};UI.title=false;UI.hudS=null;UI.trkS=null;cam.x=camX(P.x-VW/2);cam.y=camY(P.y-VH/2);
   UI.screen=null;
-  showModal({title:'Willkommen bei Entertain Master',text:'Hanfred Hanfbier hat dir ein Feldbett im Imbiss und einen brummenden Hacker-PC im Hinterzimmer überlassen. Im Lager: ein Receiver, eine Antenne, eine Kabelrolle und ein wackeliger M3U-Code. Die Leute in Rheinhanfen wollen alle Sender, die neuesten Filme und Serien. Im Menü findest du die Medien-Zentrale mit den ersten Anfragen. Hardware gibt es bei Elektro-Ramsch, Codes und Hacker-Kurse im Netzcafé Pixelhöhle. Vorsicht vor den Spürwagen mit der Schüssel auf dem Dach! Lieferdienst und Rhein-Apotheke laufen nebenbei weiter. Werde der Entertain Master!',choices:[{label:'Los geht\'s',a:'mclose'}]});
+  showModal({title:'Willkommen bei Entertain Master',text:'Du bist Pizzabote bei Hanfred Hanfbier in Rheinhanfen und fährst auch für die Rhein-Apotheke. Du schläfst auf einem Feldbett im Imbiss. Dein Traum: alle Leute unterhalten! Ziel: das größte Unterhaltungs-Imperium Europas.',lines:['1. Verdien dein Startgeld mit Lieferjobs (Menü → Handy: Nebenjobs).','2. Kauf Receiver und Antenne oder Kabel bei Elektro-Ramsch.','3. Dann entweder ein Code im Netzcafé (billig, aber illegal) oder die Sendelizenz im Amt für Alles (teurer, aber sauber).','4. Medien-Aufträge annehmen: Das Navi führt dich zu den Leuten.','Unten links steht immer dein nächstes Ziel. Alle Stufen: Menü → Karriere.'],choices:[{label:'Los geht\'s',a:'mclose'}]});
  },
  cont(){if(H.loadAll()){UI.fkm={};UI.title=false;UI.hudS=null;UI.trkS=null;cam.x=camX(P.x-VW/2);cam.y=camY(P.y-VH/2);closeAll();toast(G.migr?'Spielstand geladen. Der Handel ist neu: Deine alten Waren wurden mit '+eur(G.migr)+' gutgeschrieben.':'Spielstand geladen.');G.migr=0;}else toast('Kein Spielstand gefunden.');},
  help(){UI.helpFrom=UI.screen;show('help');},
@@ -10065,7 +10435,9 @@ Object.assign(ACT,{selfEat(g){selfEat(g);},selfDrink(){selfDrink();}});
 Object.assign(ACT,{freeMe(){freeMe();},homeTake(k){res(homeTake(k));},kBuy(k){kBuy(k);},pAct(){const p=UI.ped;closeAll();if(!p||!p.act||!PACT[p.act])return;const A=PACT[p.act];p.like=true;popAdd(1);mood(4,'+4 Nett');sfx('clap');addFx(p.x,p.y-22,'♥','#ff7fb0',1.4);toast(p.nm+': '+pick(A.r));}});
 Object.assign(SCREENS,{homes(){return homesScreen();}});
 {const _sl=ACT.sleep;ACT.sleep=function(){_sl.call(ACT);if(UI.modal&&UI.modal.title==='Guten Morgen'){const W=homeWake('imbiss');UI.modal.lines=W.concat(UI.modal.lines||[]);render2();}};}
-medRegister();
+medRegister();karRegister();
+window.HHO={karChecks:karChecks,karCheck:karCheck,karPct:karPct,zus:zus,prog:prog,mPlace:mPlace,mktGen:mktGen,MKT:MKT,mktDoneN:mktDoneN,mktCount:mktCount,medRazzia:medRazzia,rufAdd:rufAdd,verAdd:verAdd,KARQ:KARQ,karTrk:karTrk,zReach:zReach,zCands:zCands,isSolid:isSolid,tget:tget,mktDone:mktDone,MSTUFE:MSTUFE};
+window.HHN={medTargets:medTargets,medNavT:medNavT,medTrk:medTrk,medNavSet:medNavSet,medNavNext:medNavNext,mWhere:mWhere};
 window.HHC={CPAD:CPAD,camPad:camPad,dims:()=>({MW:MW,MH:MH,VW:VW,VH:VH,TS:TS}),cam:()=>({x:cam.x,y:cam.y})};
 window.HHK={HOMES:HOMES,homeK:homeK,homeTake:homeTake,homeDay:homeDay,kSleep:kSleep,skAct19:skAct19,fbSlide:fbSlide,fbJump:fbJump,rodelGo:rodelGo,skiGo:skiGo,FBS:FBS,SKIG:SKIG,RODEL:RODEL,GBP:GBP,GBLIFT:GBLIFT,kpAt:kpAt,kpBuild:kpBuild,KSKM:KSKM,kBuy:kBuy,newDay:newDay,kEvent:kEvent,KEL:()=>KEL,setKEL:v=>{KEL=v;},PACT:PACT,pActPick:pActPick,KBEPS:KBEPS,skAct20:skAct20,show:show,closeAll:closeAll,openMarker:openMarker,render2:render2};
 window.HHJ={unstuck:unstuck,freeMe:freeMe,BEPS:BEPS,bepStart:bepStart,BEA:()=>BEA,qEvent:qEvent,skAct18:skAct18,xrSteal:xrSteal,rideWet:rideWet,XRD:XRD,pushOut:pushOut};
