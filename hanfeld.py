@@ -363,7 +363,7 @@ const GOODS={
  m_kuchen:{n:'Kaffee & Kuchen',u:'Gedeck',base:6},
  b_alt:{n:'Alt',u:'Sixpack',base:8},
  b_pils:{n:'Pils',u:'Sixpack',base:7},
- b_export:{n:'Export',u:'Sixpack',base:7},
+ b_koelsch:{n:'Kölsch',u:'Sixpack',base:7},
  b_frei:{n:'Alkoholfrei',u:'Sixpack',base:6},
  c_apo:{n:'Rezept-Päckchen',u:'Päckchen',base:0},
  c_holl:{n:'Coffeeshop-Gras',u:'Tütchen',base:10},
@@ -371,13 +371,13 @@ const GOODS={
  koffer:{n:'Geheimrezept',base:0}
 };
 const MENUS=['m_curry','m_pizza','m_doener','m_gyros','m_asia','m_kuchen'];
-const BEERS=['b_alt','b_pils','b_export','b_frei'];
+const BEERS=['b_alt','b_pils','b_koelsch','b_frei'];
 const WEED=['c_holl','c_str'];
 const TRADE=MENUS.concat(BEERS,WEED,['c_apo']);
-const ALC={b_alt:1,b_pils:1,b_export:1};
+const ALC={b_alt:1,b_pils:1,b_koelsch:1};
 const ILL={c_holl:1,c_str:1};
 const SELL=MENUS.concat(BEERS,WEED);
-const SHOP={hq:['m_curry'],pizza:['m_pizza'],doener:['m_doener'],grieche:['m_gyros'],asia:['m_asia'],cafe:['m_kuchen'],mega:['b_alt','b_pils','b_export','b_frei'],land:['b_alt','b_frei'],hafen:['b_pils','b_export']};
+const SHOP={hq:['m_curry'],pizza:['m_pizza'],doener:['m_doener'],grieche:['m_gyros'],asia:['m_asia'],cafe:['m_kuchen'],mega:['b_alt','b_pils','b_koelsch','b_frei'],land:['b_alt','b_frei'],hafen:['b_pils','b_koelsch']};
 const DIST={
  hq:{n:'Imbiss Hanfred Hanfbier',sub:'Deine Zentrale',d:'Hier startet jede Tour. Die Küche brutzelt Currywurst-Menüs, du lieferst aus. Abends ist hier alles sicher, und Chefin Willi hat immer einen Spruch parat.'},
  apo:{n:'Rhein-Apotheke',sub:'Dein Hauptjob',d:'Apothekerin Dr. Kräutlein packt Rezepte für ihre Patienten: Medizinal-Cannabis in Apotheken-Qualität, verplombt und legal. Du bringst die Päckchen zu den Patienten. Ehrliche Arbeit, fester Lohn, gutes Trinkgeld.'},
@@ -386,7 +386,7 @@ const DIST={
  altstadt:{n:'Zum goldenen Fass',sub:'Altstadt',c:1,d:'Die längste Theke der Stadt. Wenn das Fass leer ist, bestellen die Wirte Nachschub bei dir.'},
  land:{n:'Landgut Hopfenhof',sub:'Landgut',c:1,pf:.9,d:'Die Hofbrauerei braut Alt und Alkoholfreies. Der Bauer winkt freundlich und verkauft ab Hof.'},
  club:{n:'Club Neon',sub:'Clubmeile',c:1,d:'Bass, Nebel und volle Taschen. Die Türsteher kontrollieren Ausweise: Alkohol erst ab 18!'},
- hafen:{n:'Hafen-Großhandel',sub:'Hafen',c:1,pf:.9,d:'Pils und Export palettenweise und günstig. Und hinten im Hof steht Kalle, der leise „Psst“ macht.'},
+ hafen:{n:'Hafen-Großhandel',sub:'Hafen',c:1,pf:.9,d:'Pils und Kölsch palettenweise und günstig. Und hinten im Hof steht Kalle, der leise „Psst“ macht.'},
  stadion:{n:'Stadionkiosk',sub:'Stadion',c:1,d:'90 Minuten Hunger und Durst. An Spieltagen wird pausenlos bestellt.'},
  verein:{n:'Vereinsheim SV Rheinhanfen',sub:'Sportpark',c:1,d:'Nach dem Training haben alle Hunger. Hier wird nur Alkoholfreies bestellt, die Jugend ist ja dabei.'},
  pizza:{n:'Pizzeria Bella Rheinhanfen',sub:'Grachtenviertel',food:'pizza',d:'Steinofen, Basilikum und ein Chef, der bei jeder Bestellung singt. Hier gibt es das Pizza-Menü.'},
@@ -394,7 +394,7 @@ const DIST={
  grieche:{n:'Taverna Olympia',sub:'Grachtenviertel',food:'grieche',d:'Blau-weiße Tischdecken, der Gyros-Teller dampft, und der Ouzo kommt aufs Haus. Opa!'},
  asia:{n:'Asia Wok Glück',sub:'Grachtenviertel',food:'asia',d:'Der Wok zischt, die Asia-Boxen stapeln sich, und in jede gehört ein Glückskeks.'},
  cafe:{n:'Cafeteria Kanalblick',sub:'Grachtenviertel',food:'cafe',d:'Kaffee und Kuchen zum Mitnehmen, dazu ein Fensterplatz mit Blick auf die Boote.'},
- mega:{n:'MEGAMARKT',sub:'Riesen-Supermarkt',food:'mega',pf:.85,d:'So groß, dass es zwischen den Regalen Straßenschilder gibt. Alt, Pils, Export und Alkoholfrei, alles günstig.'}
+ mega:{n:'MEGAMARKT',sub:'Riesen-Supermarkt',food:'mega',pf:.85,d:'So groß, dass es zwischen den Regalen Straßenschilder gibt. Alt, Pils, Kölsch und Alkoholfrei, alles günstig.'}
 };
 const CUST=Object.keys(DIST).filter(k=>DIST[k].c);
 const MARKETS=CUST;
@@ -420,10 +420,10 @@ const EVT=[
  {t:'Regentag: Keiner will raus, der Lieferdienst boomt.',m:[['m_*','*',1.3]]},
  {t:'Grippewelle: In der Rhein-Apotheke stapeln sich die Rezepte.',m:[['rezept','*',1.4]]},
  {t:'Großkontrolle der Polizei: Straßenhandel ist heute besonders riskant.',m:[['street','*',1.8]]},
- {t:'Gartenparty im Villenviertel: Gyros und Export für alle.',m:[['m_gyros','villen',1.5],['b_export','villen',1.4]]},
+ {t:'Gartenparty im Villenviertel: Gyros und Kölsch für alle.',m:[['m_gyros','villen',1.5],['b_koelsch','villen',1.4]]},
  {t:'Pokalspiel im Sportpark: Das Vereinsheim will Pizza und Alkoholfreies.',m:[['m_pizza','verein',1.6],['b_frei','verein',1.5]]},
  {t:'Kaffeeklatsch auf dem Landgut: Kaffee und Kuchen für den ganzen Hof.',m:[['m_kuchen','land',1.6]]},
- {t:'Clubnacht im Neon: Export und Asia-Boxen gehen weg wie nichts.',m:[['b_export','club',1.5],['m_asia','club',1.4]]}
+ {t:'Clubnacht im Neon: Kölsch und Asia-Boxen gehen weg wie nichts.',m:[['b_koelsch','club',1.5],['m_asia','club',1.4]]}
 ];
 
 let G=null;
@@ -6537,7 +6537,7 @@ function mallePeds(z,add){
  add(14,[SW],q=>{q.x=24*TS+rf(-170,170);q.y=23*TS+rf(0,90);q.st='dance';q.stT=1e9;});
 }
 
-function myBeer(){return ['b_pils','b_export','b_alt'].find(g=>(G.inv[g]||0)>0)||null;}
+function myBeer(){return ['b_pils','b_koelsch','b_alt'].find(g=>(G.inv[g]||0)>0)||null;}
 function canSellPed(){return SELL.some(g=>(G.inv[g]||0)>0);}
 function pedWish(p){if(!p.wish)p.wish=pick(p.teen?MENUS.concat(['b_frei']):MENUS.concat(BEERS));return p.wish;}
 function pedWhy(p,g,ng,mn){
